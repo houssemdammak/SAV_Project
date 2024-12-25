@@ -1,0 +1,120 @@
+/* Style for the modal content */
+mat-dialog-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for each mat-form-field to align them */
+/* mat-form-field {
+  width: 100%;
+} */
+.mat-form-field {
+  font-size: 14px; /* Correspond à Tailwind `text-sm` */
+}
+
+/* .mat-form-field .mat-input-element {
+  padding: 0.5rem; 
+} */
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: #d1d5db; /* Correspond à Tailwind `border-gray-300` */
+}
+
+.mat-form-field-label {
+  color: #6b7280; /* Correspond à Tailwind `text-gray-500` */
+}
+
+
+/* Style for the mat-dialog-actions to align buttons to the right */
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 24px;
+}
+
+/* Button styling for consistency */
+.mat-raised-button {
+  margin-left: 8px;
+}
+
+/* Date range input specific styles */
+mat-date-range-input {
+  display: flex;
+  gap: 8px;
+}
+
+/* Mat-error positioning and color for better readability */
+mat-error {
+  font-size: 12px;
+  color: #d32f2f; /* Material red color */
+}
+
+/* Placeholder styling */
+::ng-deep input[matInput]::placeholder {
+  color: rgba(0, 0, 0, 0.54);
+  opacity: 1;
+}
+
+
+
+
+
+/* Customize the dialog container itself */
+/* ::ng-deep .mat-dialog-container {
+  max-width: 600px;
+  border-radius: 8px;
+} */
+/* General button styling */
+button.mat-raised-button {
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Primary button styling (Save) */
+button.mat-raised-button.mat-primary {
+  background-color: #1976d2; /* Material blue */
+  color: white;
+}
+
+button.mat-raised-button.mat-primary:hover {
+  background-color: #1565c0; /* Darker blue on hover */
+}
+
+button.mat-raised-button.mat-primary:disabled {
+  background-color: #b0bec5; /* Grey when disabled */
+  color: white;
+}
+
+/* Secondary button styling (Close) */
+button.mat-raised-button {
+  background-color: #e0e0e0; /* Light grey */
+  color: #333;
+}
+
+button.mat-raised-button:hover {
+  background-color: #d5d5d5; /* Darker grey on hover */
+}
+
+button.mat-raised-button:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px #1976d2;
+}
+
+/* Add spacing between buttons */
+mat-dialog-actions .mat-raised-button:first-child {
+  margin-right: 8px;
+}
+.time-fields {
+  display: flex;
+  gap: 16px; /* Espacement entre les champs */
+  align-items: center;
+}
+
+.time-field {
+  flex: 1; /* Les champs prennent toute la largeur disponible */
+}

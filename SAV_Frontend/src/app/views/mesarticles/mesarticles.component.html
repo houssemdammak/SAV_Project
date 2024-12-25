@@ -1,0 +1,44 @@
+<app-index-navbar></app-index-navbar>
+
+<section class="mt-20 pb-12 p-4 bg-blueGray-100">
+<div class="flex justify-center mb-7-20 pb-12 p-4 bg-blueGray-100"><p class="text-3xl font-light bold ">Mes Articles</p></div>
+    <div class="container mx-auto">
+      <div class="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          *ngFor="let card of cards"
+          class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col"
+        >
+          <div class="relative p-2  flex flex-col md:flex-row my-6 rounded-lg w-full">
+            <div class="relative md:w-4/12 p-2.5 flex  flex-col items-center   shrink-0 overflow-hidden">
+              <img
+                [src]="card.imgUrl"  alt="card-image"
+                class="h-20 w-20 rounded-full items-center border-none shadow-lg md:rounded-lg object-cover"
+              />
+              <!-- <div class="flex mt-2 flex-col items-center">
+                <p class=" text-center text-slate-600 leading-normal font-light">
+                    {{card.auteur}}
+                  </p>
+              </div> -->
+              
+            </div>
+            <div class="p-6 mx-4">
+              <h4 class="mb-2 text-slate-800 text-xl font-semibold">{{card.title}}
+              </h4>
+              <p class="mb-8 text-slate-600 leading-normal font-light">
+                {{card.description}}
+              </p>
+              <div>
+                <a (click)="addNewReclamation()" class="text-slate-800 font-semibold text-sm hover:underline flex items-center">
+                  Reclamer cet Article
+                  <i class="fa-solid mx-4 fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  

@@ -1,0 +1,65 @@
+{
+  "members": [
+    {
+      "cin": "122",
+      "name": "yasmine edit",
+      "cv": "lien",
+      "type": "student",
+      "createdDate": "2024-10-16T10:43:08.518Z",
+      "id": "22"
+    },
+    {
+      "cin": "15",
+      "name": "houssem dammak",
+      "cv": "aaa",
+      "type": "teacher",
+      "createdDate": "2024-10-16T10:43:27.137Z",
+      "id": "ed32"
+    },
+    {
+      "cin": null,
+      "name": "yasmine  ghorbel",
+      "cv": "hh",
+      "type": "student",
+      "createdDate": "2024-10-16T10:43:54.081Z",
+      "id": "45fd"
+    }
+  ],
+  "event": [
+    {
+      "id": "1",
+      "title": "meet ce soir",
+      "dateDebut": "2024-11-15T23:00:00.000Z",
+      "dateFin": "2024-10-16T23:00:00.000Z",
+      "lieu": "sfax"
+    },
+    {
+      "id": "2",
+      "title": "reunion",
+      "dateDebut": "2024-10-06T23:00:00.000Z",
+      "dateFin": "2024-10-29T23:00:00.000Z",
+      "lieu": "home"
+    },
+    {
+      "id": "3",
+      "title": "meet",
+      "dateDebut": "2024-11-14T09:00:00.000Z",
+      "dateFin": "2024-11-18T22:00:00.000Z",
+      "lieu": "sfax"
+    },
+    {
+      "id": "4",
+      "title": "learn angular",
+      "dateDebut": "2024-11-06T23:00:00.000Z",
+      "dateFin": "2024-11-06T23:00:00.000Z",
+      "lieu": "sfax"
+    },
+    {
+      "id": "335e",
+      "title": "learn spring",
+      "dateDebut": "2024-11-15T23:00:00.000Z",
+      "dateFin": "2024-11-15T23:00:00.000Z",
+      "lieu": "sfax"
+    }
+  ]
+}

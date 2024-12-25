@@ -1,0 +1,86 @@
+<mat-dialog-content *ngIf="form" [formGroup]="form"  >
+  <!-- Title Field -->
+   
+  <mat-form-field class="w-full" >
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title"  class="text-sm ">
+  </mat-form-field>
+
+  <!-- Date Range Picker -->
+  <mat-form-field  class="w-full">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" class="w-full text-sm">
+      <input matStartDate formControlName="dateDebut" placeholder="Start date">
+      <input matEndDate formControlName="dateFin" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+    <mat-error class="text-red-500">Invalid start date and end date</mat-error>
+  </mat-form-field>
+
+  <!-- Checkbox for Time Selection -->
+  <section class="example-section flex items-center space-x-2 mb-4">
+    <mat-checkbox
+      [formControl]="check"
+      (change)="onCheckboxChange(form.get('tempsDebut')?.value, form.get('tempsFin')?.value)"
+    >
+      Select start and end time
+    </mat-checkbox>
+  </section>
+
+  <!-- Time Fields -->
+  <div class="time-fields space-y-4" *ngIf="check.value">
+    <mat-form-field class="time-field w-full">
+      <mat-label>Enter a start time</mat-label>
+      <input
+        matInput
+        name="selected_time_B"
+        formControlName="tempsDebut"
+        [format]="24"
+        [ngxMatTimepicker]="pickerA"
+        readonly
+        class="text-sm"
+      />
+      <mat-icon matSuffix (click)="pickerA.open()"><i class="fa-regular fa-clock"></i></mat-icon>
+      <mat-error class="text-red-500">Invalid start time</mat-error>
+    </mat-form-field>
+
+    <mat-form-field  class="time-field w-full">
+      <mat-label>Enter an end time</mat-label>
+      <input
+        matInput
+        name="selected_time_B"
+        formControlName="tempsFin"
+        [format]="24"
+        [ngxMatTimepicker]="pickerB"
+        readonly
+        class="text-sm"
+      />
+      
+      <mat-icon matSuffix (click)="pickerB.open()"><i class="fa-regular fa-clock"></i></mat-icon>
+      <mat-error class="text-red-500">Invalid end time</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Timepickers -->
+  <ngx-mat-timepicker color="accent" #pickerA></ngx-mat-timepicker>
+  <ngx-mat-timepicker color="accent" #pickerB></ngx-mat-timepicker>
+
+  <!-- Location Field -->
+  <mat-form-field  class="w-full">
+    <mat-label>Lieu</mat-label>
+    <input matInput formControlName="lieu" class="text-sm">
+  </mat-form-field>
+
+  <!-- Dialog Actions -->
+  <mat-dialog-actions class="flex justify-end space-x-2 pt-4">
+    <button class="mat-raised-button bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2" (click)="close()">Close</button>
+    <button
+      class="mat-raised-button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2"
+      [disabled]="form.invalid"
+      (click)="save()"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

@@ -1,0 +1,59 @@
+<!-- Header -->
+<div class="relative bg-red-600 md:pt-32 pb-32 pt-12">
+  <div class="px-4 md:px-10 mx-auto w-full">
+    <div *ngIf="iDashboardPage">
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+          <app-card-stats
+            statSubtitle="Publications"
+            statTitle="350,897"
+            statPercentColor="text-emerald-500"
+            statIconName="far fa-regular fa-newspaper"
+            statIconColor="bg-red-500"
+          ></app-card-stats>
+        </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+          <app-card-stats
+            statSubtitle="Tools"
+            statTitle="2,356"
+            statPercentColor="text-red-500"
+            statDescripiron="Since last week"
+            statIconName="fa-solid fa-screwdriver-wrench"
+            statIconColor="bg-orange-500"
+          ></app-card-stats>
+        </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+          <app-card-stats
+            statSubtitle="Professor"
+            statTitle="924"
+            statPercentColor="text-orange-500"
+            statIconName="fas fa-users"
+            statIconColor="bg-pink-500"
+          ></app-card-stats>
+        </div>
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+          <app-card-stats
+            statSubtitle="Students"
+            statTitle="49,65%"
+            statPercent="12"
+            statPercentColor="text-emerald-500"
+            statIconName="fas fa-user-graduate"
+            statIconColor="bg-emerald-500"
+          ></app-card-stats>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <app-card-stats
+statSubtitle="Publications"
+statTitle="350,897"
+statArrow="up"
+statPercent="3.48"
+statPercentColor="text-emerald-500"
+statDescripiron="Since last month"
+statIconName="far fa-regular fa-newspaper"
+statIconColor="bg-red-500"
+></app-card-stats> -->
