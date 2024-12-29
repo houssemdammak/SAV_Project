@@ -7,7 +7,7 @@ import { AuthComponent } from "./layouts/auth/auth.component";
 
 // admin views
 import { MembersAdminComponent } from "./views/admin/members/members.component";
-import { PubsComponent } from "./views/admin/pubs/pubs.component";
+import { ReclamationsAdminComponent } from "./views/admin/reclamationsadmin/reclamationsadmin.component";
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
@@ -26,8 +26,8 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: "members", component: MembersAdminComponent },
-      { path: "publications", component: PubsComponent },
-      { path: "tools", component: ToolsComponent },
+      { path: "reclamationsadmin", component: ReclamationsAdminComponent },
+      { path: "articles", component: ToolsComponent },
       { path: "", redirectTo: "tools", pathMatch: "full" },
     ],
   },

@@ -11,7 +11,7 @@ namespace SAV_Backend.Dto
         public int ClientId { get; set; }
         public int ArticleId { get; set; }
 
-        public int StatutReclamationId { get; set; }
-
+/*        public int StatutReclamationId { get; set; }
+*/
     }
 }

@@ -59,9 +59,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
-import { PubsComponent } from "./views/admin/pubs/pubs.component";
+import { ReclamationsAdminComponent } from "./views/admin/reclamationsadmin/reclamationsadmin.component";
 import { ToolsComponent } from "./views/admin/tools/tools.component";
 import { ReclamationModalComponent } from './components/reclamation-modal/reclamation-modal.component';
+import { InterventionModalComponent } from './components/intervention-modal/intervention-modal.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -98,14 +101,14 @@ import { ReclamationModalComponent } from './components/reclamation-modal/reclam
     ProfileComponent,
     MembersAdminComponent,
     MesArticlesComponent,
-    ModalComponent,PubsComponent,ToolsComponent, ReclamationModalComponent
+    ModalComponent,ReclamationsAdminComponent,ToolsComponent, ReclamationModalComponent, InterventionModalComponent
   ],
-  imports: [BrowserModule, AppRoutingModule,FormsModule,
+  imports: [BrowserModule, AppRoutingModule,FormsModule,MatOptionModule,
     ReactiveFormsModule,MatFormFieldModule
     ,FullCalendarModule ,MatDialogModule,
     MatCheckboxModule,HttpClientModule,MatButtonModule,
     NgxMatTimepickerModule,MatIconModule,MatDatepickerModule
-    ,MatNativeDateModule,MatInputModule,BrowserAnimationsModule,
+    ,MatNativeDateModule,MatInputModule,BrowserAnimationsModule,MatSelectModule
        
   ],
   providers: [],

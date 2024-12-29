@@ -1,6 +1,5 @@
 <a
   class="text-blueGray-500 block py-1 px-3"
-  href="#pablo"
   (click)="toggleDropdown($event)"
   #btnDropdownRef
 >
@@ -12,16 +11,16 @@
     [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
   >
     <a
-      href=""
+      (click)="onIntervention()"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-    >Edit
+    >Intervenir
       
     </a>
     <a
-      (click)="deleteElement()"
+      (click)="onMark()"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
     >
-    Delete
+    Marquer Terminé
     </a>
 
   </div>

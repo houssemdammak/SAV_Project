@@ -17,7 +17,7 @@
       [routerLink]="['/']"
       class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
     >
-      <span class="hidden sm:block">laboratoire de recherche </span>
+      <span class="flex justify-center text-red-500">ThermoSanitaire</span>
     </a>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -74,7 +74,7 @@
       <h6
         class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
       >
-        Admin Layout Pages
+        Outils Admin
       </h6>
       <!-- Navigation -->
 
@@ -84,12 +84,12 @@
         
         <li class="items-center">
           <a
-            [routerLink]="['/admin/publications']"
+            [routerLink]="['/admin/reclamationsadmin']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
-            #publications="routerLinkActive"
+            #reclamation="routerLinkActive"
             [ngClass]="
-              publications.isActive
+              reclamation.isActive
                 ? 'text-red-600 hover:text-red-700'
                 : 'text-blueGray-700 hover:text-blueGray-500'
             "
@@ -97,20 +97,20 @@
             <i
               class="fa-regular fa-newspaper mr-2 text-sm"
               [ngClass]="
-                publications.isActive ? 'opacity-75' : 'text-blueGray-300'
+                reclamation.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Publications
+            Reclamations
           </a>
         </li>
         <li class="items-center">
           <a
-            [routerLink]="['/admin/tools']"
+            [routerLink]="['/admin/articles']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
-            #Tools="routerLinkActive"
+            #article="routerLinkActive"
             [ngClass]="
-              Tools.isActive
+              article.isActive
                 ? 'text-red-600 hover:text-red-700'
                 : 'text-blueGray-700 hover:text-blueGray-500'
             "
@@ -118,43 +118,13 @@
             <i
               class="fa-solid fa-toolbox mr-2 text-sm"
               [ngClass]="
-                publications.isActive ? 'opacity-75' : 'text-blueGray-300'
+                article.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Tools
-          </a>
-        </li>
-        <li class="items-center">
-          <a
-            [routerLink]="['/admin/members']"
-            class="text-xs uppercase py-3 font-bold block"
-            routerLinkActive
-            #adminTables="routerLinkActive"
-            [ngClass]="
-              adminTables.isActive
-                ? 'text-red-600 hover:text-red-700'
-                : 'text-blueGray-700 hover:text-blueGray-500'
-            "
-          >
-            <i
-              class="fa-solid fa-users mr-2 text-sm"
-              [ngClass]="
-                adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
-              "
-            ></i>
-            Members
+            Articles
           </a>
         </li>
 
-        <!-- <li class="items-center">
-          <a
-          [routerLink]="['/profile']"
-          class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-        >
-          <i class="fas fa-user-circle text-blueGray-300 mr-2 text-sm"></i>
-          Profile Page
-        </a>
-        </li> -->
       </ul>
 
       <!-- Divider -->

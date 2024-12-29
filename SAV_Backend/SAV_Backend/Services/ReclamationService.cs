@@ -46,7 +46,7 @@ namespace SAV_Backend.Services
                     Description=model.Description,
                     ClientId=model.ClientId,
                     ArticleId=model.ArticleId,
-                    StatutReclamationId=model.StatutReclamationId,
+                    StatutReclamationId=1,
                 };
                 await _context.Reclamations.AddAsync(reclamation);
 

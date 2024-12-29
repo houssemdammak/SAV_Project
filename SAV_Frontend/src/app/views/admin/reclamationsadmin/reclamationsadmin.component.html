@@ -7,7 +7,7 @@
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3
                 class="font-semibold text-lg "        >
-                Publications
+                Reclamations
               </h3>
             </div>
           </div>
@@ -26,13 +26,13 @@
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                   
                 >
-                  Title
+                  Description
                 </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                   
                 >
-                  Type 
+                  Status 
                 </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -44,13 +44,13 @@
                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                 
               >
-                Member
+                Client
               </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                   
                 >
-                  Pdf
+                  Article
                 </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -102,7 +102,8 @@
                 <td
                   class="border-t-0 align-middle border-l-0 border-r-0 text-xs p-4 text-left"
                 >
-                  <app-table-dropdown></app-table-dropdown>
+                <app-table-dropdown (edit)="handleEdit($event)"
+                (delete)="handleDelete($event)"></app-table-dropdown>
                 </td>
               </tr>
 

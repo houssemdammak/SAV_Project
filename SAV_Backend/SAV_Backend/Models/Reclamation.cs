@@ -14,7 +14,7 @@ namespace SAV_Backend.Models
 
         [JsonIgnore]
         public Article? Article { get; set; }
-
+                                        
         public int StatutReclamationId { get; set; }
         public StatutReclamation? StatutReclamation { get; set; } 
         public ICollection<Intervention>? Interventions { get; set; }
