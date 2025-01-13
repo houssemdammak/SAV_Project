@@ -10,5 +10,6 @@ namespace SAV_Backend.Interfaces
         Task<bool> CreateClient(ClientCreateModel model);
         Task<bool> UpdateClient(int id, Client client);
         Task<bool> DeleteClient(int id);
+        Task<IEnumerable<Article>> GetArticles(int clientId);
     }
 }

@@ -63,5 +63,17 @@ namespace SAV_Backend.Controllers
 
             return NoContent();
         }
+        [HttpGet("articles/{clientId}")]
+        public async Task<ActionResult<IEnumerable<Article>>> GetArticles(int clientId)
+        {
+            
+            var articles = await _clientService.GetArticles(clientId);
+            if (articles==null) {
+                return NotFound("Articles not found");
+            }
+                
+            return Ok(articles);
+        }
+
     }
 }

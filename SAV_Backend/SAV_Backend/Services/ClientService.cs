@@ -31,6 +31,23 @@ namespace SAV_Backend.Services
                         .FirstOrDefaultAsync(c => c.Id == id);
         }
 
+
+        public async Task<IEnumerable<Article>> GetArticles(int clientId)
+        {
+            // Retrieve the article IDs associated with the specified client
+            var articleIds = await _context.ClientArticles
+                .Where(ca => ca.ClientId == clientId)
+                .Select(ca => ca.ArticleId)
+                .ToListAsync();
+
+            // Retrieve the articles with the specified IDs
+            var articles = await _context.Articles
+                .Where(a => articleIds.Contains(a.Id))
+                .ToListAsync();
+
+            return articles;
+        }
+
         public async Task<bool> CreateClient(ClientCreateModel model)
         {
             var applicationUser = new ApplicationUser
