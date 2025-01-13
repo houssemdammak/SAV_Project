@@ -33,7 +33,7 @@ namespace SAV_Backend.Controllers
             // Check if user exists
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
-                return Unauthorized("Invalid email or password.");
+                return Unauthorized("Invalid email");
 
             // Sign in user
             var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, lockoutOnFailure: false);
@@ -45,9 +45,9 @@ namespace SAV_Backend.Controllers
             }
 
             if (result.IsLockedOut)
-                return Unauthorized("Account locked out.");
+                return Unauthorized("Invalid password");
 
-            return Unauthorized("Invalid login attempt.");
+            return Unauthorized("Invalid password");
         }
 
         private string GenerateJwtToken(IdentityUser user)
