@@ -14,7 +14,6 @@ namespace SAV_Backend.Dto
         public ICollection<int>? PieceIds { get; set; }
 
 
-        /*        public ICollection<Piece>? Pieces { get; set; }
-        */
+    
     }
 }
