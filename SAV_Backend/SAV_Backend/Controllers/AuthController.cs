@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SAV_Backend.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -31,17 +32,39 @@ namespace SAV_Backend.Controllers
                 return BadRequest(ModelState);
 
             // Check if user exists
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            //var user = await _userManager.FindByEmailAsync(model.Email);
+
+            var user = await _userManager.Users
+               .Include(u => u.Client)
+               .Include(u => u.ResponsableSAV)
+               .FirstOrDefaultAsync(u => u.Email == model.Email);
+
             if (user == null)
                 return Unauthorized("Invalid email");
 
             // Sign in user
             var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, lockoutOnFailure: false);
+
+
             if (result.Succeeded)
             {
-                // Optionally generate a JWT token if your app uses token-based authentication
-                var token = GenerateJwtToken(user);
-                return Ok(new { token });
+                string userType;
+                if (user.Client != null)
+                {
+                    userType = "Client";
+                }
+                else if (user.ResponsableSAV != null)
+                {
+                    userType = "ResponsableSAV";
+                }
+                else
+                {
+                    userType = "Unknown";
+                }
+
+                // Generate a JWT token
+                var token = GenerateJwtToken(user, userType);
+                return Ok(new { token, userType });
             }
 
             if (result.IsLockedOut)
@@ -50,15 +73,16 @@ namespace SAV_Backend.Controllers
             return Unauthorized("Invalid password");
         }
 
-        private string GenerateJwtToken(IdentityUser user)
+        private string GenerateJwtToken(IdentityUser user, string userType)
         {
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Email, user.Email)
-            };
+        new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        new Claim(ClaimTypes.Email, user.Email),
+        new Claim("UserType", userType) // Add user type as a custom claim
+    };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourEvenMoreSuperSecretKey123456!"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -73,6 +97,7 @@ namespace SAV_Backend.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
         [HttpGet("protected-endpoint")]
         [Authorize]
         public IActionResult ProtectedEndpoint()
