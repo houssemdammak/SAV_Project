@@ -38,10 +38,13 @@ namespace SAV_Backend.Controllers
         public async Task<IActionResult> CreateClient(ClientCreateModel model)
         {
             var result = await _clientService.CreateClient(model);
-            if (result== "Success")
+            if (result!= "Success")
+                return BadRequest(result);
+            else
+            {
                 return Ok("User and client created successfully.");
 
-            return BadRequest(result);
+            }
         }
 
         [HttpPut("{id}")]
