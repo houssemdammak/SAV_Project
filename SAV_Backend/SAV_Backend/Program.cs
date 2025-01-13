@@ -33,6 +33,10 @@ namespace SAV_Backend
             builder.Services.AddScoped<IArticleService, ArticleService>();
             builder.Services.AddScoped<IInterventionService, InterventionService>();
             builder.Services.AddScoped<INotificationClientService, NotificationClientService>();
+            builder.Services.AddScoped<IClientArticleService, ClientArticleService>();
+            builder.Services.AddScoped<IPieceService, PiecesService>();
+
+
 
             /* builder.Services.AddControllers()
                      .AddJsonOptions(options =>

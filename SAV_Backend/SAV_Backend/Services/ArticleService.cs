@@ -74,7 +74,7 @@ namespace SAV_Backend.Services
                 existingArticle.Nom = updatedArticle.Nom;
                 existingArticle.Description = updatedArticle.Description;
                 existingArticle.DateFabrication = updatedArticle.DateFabrication;
-                existingArticle.DateFinGarantie = updatedArticle.DateFinGarantie;
+               // existingArticle.DateFinGarantie = updatedArticle.DateFinGarantie;
 
                 _context.Articles.Update(existingArticle);
                 await _context.SaveChangesAsync();

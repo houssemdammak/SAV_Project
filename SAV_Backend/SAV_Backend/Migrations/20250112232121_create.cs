@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SAV_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class create : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,8 +21,7 @@ namespace SAV_Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateFabrication = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateFinGarantie = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DateFabrication = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,7 +75,7 @@ namespace SAV_Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Prix = table.Column<float>(type: "real", nullable: false),
+                    Prix = table.Column<double>(type: "float", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -252,6 +251,56 @@ namespace SAV_Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClientArticles",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    DateFinGarantie = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientArticles", x => new { x.ClientId, x.ArticleId });
+                    table.ForeignKey(
+                        name: "FK_ClientArticles_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClientArticles_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NotificationClients",
+                columns: table => new
+                {
+                    NotificationClientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderId = table.Column<int>(type: "int", nullable: false),
+                    SenderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverId = table.Column<int>(type: "int", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    IsVisited = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotificationClients", x => x.NotificationClientId);
+                    table.ForeignKey(
+                        name: "FK_NotificationClients_Clients_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reclamations",
                 columns: table => new
                 {
@@ -259,7 +308,6 @@ namespace SAV_Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateReclamation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Statut = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     ArticleId = table.Column<int>(type: "int", nullable: true),
                     StatutReclamationId = table.Column<int>(type: "int", nullable: false)
@@ -272,7 +320,7 @@ namespace SAV_Backend.Migrations
                         column: x => x.ArticleId,
                         principalTable: "Articles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reclamations_Clients_ClientId",
                         column: x => x.ClientId,
@@ -294,9 +342,9 @@ namespace SAV_Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateIntervention = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MontantFacture = table.Column<float>(type: "real", nullable: false),
-                    EstGratuit = table.Column<bool>(type: "bit", nullable: false),
-                    ReclamationId = table.Column<int>(type: "int", nullable: false),
+                    MontantFacture = table.Column<double>(type: "float", nullable: true),
+                    EstGratuit = table.Column<bool>(type: "bit", nullable: true),
+                    ReclamationId = table.Column<int>(type: "int", nullable: true),
                     ResponsableSAVId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -338,6 +386,23 @@ namespace SAV_Backend.Migrations
                         principalTable: "Pieces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Pieces",
+                columns: new[] { "Id", "Description", "Nom", "Prix", "Stock" },
+                values: new object[,]
+                {
+                    { 1, "Joint en caoutchouc pour robinet standard", "Joint de robinet", 2.5, 50 },
+                    { 2, "Clapet en laiton pour systèmes de chauffage central", "Clapet anti-retour", 15.0, 20 },
+                    { 3, "Thermostat pour chauffage central avec écran LCD", "Thermostat programmable", 65.0, 10 },
+                    { 4, "Soupape de sécurité pour chauffe-eau", "Soupape de sécurité", 12.0, 25 },
+                    { 5, "Tuyau flexible en inox pour raccordement sanitaire", "Tuyau flexible inox", 8.5, 30 },
+                    { 6, "Élément de radiateur en aluminium à haute efficacité", "Radiateur en aluminium", 45.0, 15 },
+                    { 7, "Manomètre pour surveiller la pression du système", "Manomètre de pression", 18.0, 12 },
+                    { 8, "Cartouche de filtration pour purificateur d'eau", "Cartouche de filtre à eau", 10.0, 40 },
+                    { 9, "Vanne pour contrôle de température des radiateurs", "Vanne thermostatique", 25.0, 18 },
+                    { 10, "Pompe pour système de chauffage central", "Circulateur de chauffage", 120.0, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -391,6 +456,11 @@ namespace SAV_Backend.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClientArticles_ArticleId",
+                table: "ClientArticles",
+                column: "ArticleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_ApplicationUserId",
                 table: "Clients",
                 column: "ApplicationUserId",
@@ -411,6 +481,11 @@ namespace SAV_Backend.Migrations
                 name: "IX_Interventions_ResponsableSAVId",
                 table: "Interventions",
                 column: "ResponsableSAVId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotificationClients_ReceiverId",
+                table: "NotificationClients",
+                column: "ReceiverId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reclamations_ArticleId",
@@ -454,7 +529,13 @@ namespace SAV_Backend.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ClientArticles");
+
+            migrationBuilder.DropTable(
                 name: "InterventionPiece");
+
+            migrationBuilder.DropTable(
+                name: "NotificationClients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

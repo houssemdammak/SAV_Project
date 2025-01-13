@@ -9,7 +9,7 @@ namespace SAV_Backend.Models
         public DateTime DateIntervention { get; set; }
         public double? MontantFacture { get; set; }
         public bool? EstGratuit { get; set; }
-        public int ReclamationId { get; set; }
+        public int? ReclamationId { get; set; }
 
         [JsonIgnore]
         public Reclamation? Reclamation { get; set; }

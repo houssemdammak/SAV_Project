@@ -5,7 +5,7 @@
 namespace SAV_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class updateIntervention : Migration
+    public partial class create2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

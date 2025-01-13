@@ -246,9 +246,6 @@ namespace SAV_Backend.Migrations
                     b.Property<DateTime>("DateFabrication")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateFinGarantie")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -305,6 +302,24 @@ namespace SAV_Backend.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("SAV_Backend.Models.ClientArticle", b =>
+                {
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateFinGarantie")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ClientId", "ArticleId");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("ClientArticles");
+                });
+
             modelBuilder.Entity("SAV_Backend.Models.Intervention", b =>
                 {
                     b.Property<int>("Id")
@@ -322,7 +337,7 @@ namespace SAV_Backend.Migrations
                     b.Property<double?>("MontantFacture")
                         .HasColumnType("float");
 
-                    b.Property<int>("ReclamationId")
+                    b.Property<int?>("ReclamationId")
                         .HasColumnType("int");
 
                     b.Property<int>("ResponsableSAVId")
@@ -492,7 +507,7 @@ namespace SAV_Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArticleId")
+                    b.Property<int?>("ArticleId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClientId")
@@ -670,13 +685,31 @@ namespace SAV_Backend.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("SAV_Backend.Models.ClientArticle", b =>
+                {
+                    b.HasOne("SAV_Backend.Models.Article", "Article")
+                        .WithMany("ClientArticles")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SAV_Backend.Models.Client", "Client")
+                        .WithMany("ClientArticles")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("SAV_Backend.Models.Intervention", b =>
                 {
                     b.HasOne("SAV_Backend.Models.Reclamation", "Reclamation")
                         .WithMany("Interventions")
                         .HasForeignKey("ReclamationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SAV_Backend.Models.ResponsableSAV", "ResponsableSAV")
                         .WithMany("Interventions")
@@ -705,8 +738,7 @@ namespace SAV_Backend.Migrations
                     b.HasOne("SAV_Backend.Models.Article", "Article")
                         .WithMany("Reclamations")
                         .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SAV_Backend.Models.Client", "Client")
                         .WithMany("Reclamations")
@@ -746,11 +778,15 @@ namespace SAV_Backend.Migrations
 
             modelBuilder.Entity("SAV_Backend.Models.Article", b =>
                 {
+                    b.Navigation("ClientArticles");
+
                     b.Navigation("Reclamations");
                 });
 
             modelBuilder.Entity("SAV_Backend.Models.Client", b =>
                 {
+                    b.Navigation("ClientArticles");
+
                     b.Navigation("Notifications");
 
                     b.Navigation("Reclamations");

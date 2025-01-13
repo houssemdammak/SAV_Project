@@ -42,7 +42,7 @@ namespace SAV_Backend.Services
                 var reclamation = new Reclamation
                 {
                     Id = model.Id,
-                    DateReclamation=model.DateReclamation,
+                    DateReclamation= DateTime.Now,
                     Description=model.Description,
                     ClientId=model.ClientId,
                     ArticleId=model.ArticleId,

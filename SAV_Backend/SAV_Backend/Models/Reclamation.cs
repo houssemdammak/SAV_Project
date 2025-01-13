@@ -10,7 +10,7 @@ namespace SAV_Backend.Models
         public int ClientId { get; set; }
         [JsonIgnore]
         public Client?Client { get; set; }
-        public int ArticleId { get; set; }
+        public int? ArticleId { get; set; }
 
         [JsonIgnore]
         public Article? Article { get; set; }

@@ -54,8 +54,9 @@ namespace SAV_Backend.Services
             }
 
             var article = reclamation.Article;
+            var clientArticle = await _context.ClientArticles.FirstOrDefaultAsync(c=>c.ArticleId == article.Id && c.ClientId==reclamation.ClientId);
 
-            if (article.DateFinGarantie.HasValue && (article.DateFinGarantie.Value - DateTime.Now).TotalDays >= 0)
+            if (clientArticle.DateFinGarantie.HasValue && (clientArticle.DateFinGarantie.Value - DateTime.Now).TotalDays >= 0)
             {
                 model.EstGratuit = true;
                 model.MontantFacture = 0;
@@ -91,7 +92,7 @@ namespace SAV_Backend.Services
             var intervention = new Intervention
             {
                 Id = model.Id,
-                DateIntervention = model.DateIntervention,
+                DateIntervention = DateTime.Now,
                 MontantFacture = model.MontantFacture,
                 EstGratuit = model.EstGratuit,
                 ReclamationId = model.ReclamationId,

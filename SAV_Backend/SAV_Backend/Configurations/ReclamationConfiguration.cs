@@ -22,7 +22,7 @@ namespace SAV_Backend.Configurations
             builder.HasOne(r => r.Article)
               .WithMany(a => a.Reclamations)
               .HasForeignKey(r => r.ArticleId)
-              .OnDelete(DeleteBehavior.SetNull);
+              .OnDelete(DeleteBehavior.Cascade);
             
 
 

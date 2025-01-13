@@ -11,9 +11,12 @@
         public DateTime DateCreation { get; set; }
 
         public string? ApplicationUserId { get; set; } 
-        public ApplicationUser? ApplicationUser { get; set; }  
+        public ApplicationUser? ApplicationUser { get; set; }
 
         public ICollection<Reclamation>? Reclamations { get; set; }
+        //        public ICollection<Article>? Articles { get; set; }
+        public ICollection<ClientArticle>? ClientArticles { get; set; }
+
         public virtual ICollection<NotificationClient>? Notifications { get; set; }
 
 

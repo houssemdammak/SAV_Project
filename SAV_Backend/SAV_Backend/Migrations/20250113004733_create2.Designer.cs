@@ -12,8 +12,8 @@ using SAV_Backend;
 namespace SAV_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241213120734_updateArticle")]
-    partial class updateArticle
+    [Migration("20250113004733_create2")]
+    partial class create2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -249,9 +249,6 @@ namespace SAV_Backend.Migrations
                     b.Property<DateTime>("DateFabrication")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateFinGarantie")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -308,6 +305,24 @@ namespace SAV_Backend.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("SAV_Backend.Models.ClientArticle", b =>
+                {
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateFinGarantie")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ClientId", "ArticleId");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("ClientArticles");
+                });
+
             modelBuilder.Entity("SAV_Backend.Models.Intervention", b =>
                 {
                     b.Property<int>("Id")
@@ -319,13 +334,13 @@ namespace SAV_Backend.Migrations
                     b.Property<DateTime>("DateIntervention")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("EstGratuit")
+                    b.Property<bool?>("EstGratuit")
                         .HasColumnType("bit");
 
-                    b.Property<float>("MontantFacture")
-                        .HasColumnType("real");
+                    b.Property<double?>("MontantFacture")
+                        .HasColumnType("float");
 
-                    b.Property<int>("ReclamationId")
+                    b.Property<int?>("ReclamationId")
                         .HasColumnType("int");
 
                     b.Property<int>("ResponsableSAVId")
@@ -338,6 +353,44 @@ namespace SAV_Backend.Migrations
                     b.HasIndex("ResponsableSAVId");
 
                     b.ToTable("Interventions");
+                });
+
+            modelBuilder.Entity("SAV_Backend.Models.NotificationClient", b =>
+                {
+                    b.Property<int>("NotificationClientId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationClientId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVisited")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NotificationClientId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("NotificationClients");
                 });
 
             modelBuilder.Entity("SAV_Backend.Models.Piece", b =>
@@ -356,8 +409,8 @@ namespace SAV_Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Prix")
-                        .HasColumnType("real");
+                    b.Property<double>("Prix")
+                        .HasColumnType("float");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
@@ -365,6 +418,88 @@ namespace SAV_Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pieces");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Joint en caoutchouc pour robinet standard",
+                            Nom = "Joint de robinet",
+                            Prix = 2.5,
+                            Stock = 50
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Clapet en laiton pour systèmes de chauffage central",
+                            Nom = "Clapet anti-retour",
+                            Prix = 15.0,
+                            Stock = 20
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Thermostat pour chauffage central avec écran LCD",
+                            Nom = "Thermostat programmable",
+                            Prix = 65.0,
+                            Stock = 10
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Soupape de sécurité pour chauffe-eau",
+                            Nom = "Soupape de sécurité",
+                            Prix = 12.0,
+                            Stock = 25
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Tuyau flexible en inox pour raccordement sanitaire",
+                            Nom = "Tuyau flexible inox",
+                            Prix = 8.5,
+                            Stock = 30
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Élément de radiateur en aluminium à haute efficacité",
+                            Nom = "Radiateur en aluminium",
+                            Prix = 45.0,
+                            Stock = 15
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Manomètre pour surveiller la pression du système",
+                            Nom = "Manomètre de pression",
+                            Prix = 18.0,
+                            Stock = 12
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "Cartouche de filtration pour purificateur d'eau",
+                            Nom = "Cartouche de filtre à eau",
+                            Prix = 10.0,
+                            Stock = 40
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Vanne pour contrôle de température des radiateurs",
+                            Nom = "Vanne thermostatique",
+                            Prix = 25.0,
+                            Stock = 18
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "Pompe pour système de chauffage central",
+                            Nom = "Circulateur de chauffage",
+                            Prix = 120.0,
+                            Stock = 5
+                        });
                 });
 
             modelBuilder.Entity("SAV_Backend.Models.Reclamation", b =>
@@ -375,7 +510,7 @@ namespace SAV_Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArticleId")
+                    b.Property<int?>("ArticleId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClientId")
@@ -553,13 +688,31 @@ namespace SAV_Backend.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("SAV_Backend.Models.ClientArticle", b =>
+                {
+                    b.HasOne("SAV_Backend.Models.Article", "Article")
+                        .WithMany("ClientArticles")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SAV_Backend.Models.Client", "Client")
+                        .WithMany("ClientArticles")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("SAV_Backend.Models.Intervention", b =>
                 {
                     b.HasOne("SAV_Backend.Models.Reclamation", "Reclamation")
                         .WithMany("Interventions")
                         .HasForeignKey("ReclamationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SAV_Backend.Models.ResponsableSAV", "ResponsableSAV")
                         .WithMany("Interventions")
@@ -572,13 +725,23 @@ namespace SAV_Backend.Migrations
                     b.Navigation("ResponsableSAV");
                 });
 
+            modelBuilder.Entity("SAV_Backend.Models.NotificationClient", b =>
+                {
+                    b.HasOne("SAV_Backend.Models.Client", "client")
+                        .WithMany("Notifications")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("client");
+                });
+
             modelBuilder.Entity("SAV_Backend.Models.Reclamation", b =>
                 {
                     b.HasOne("SAV_Backend.Models.Article", "Article")
                         .WithMany("Reclamations")
                         .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SAV_Backend.Models.Client", "Client")
                         .WithMany("Reclamations")
@@ -618,11 +781,17 @@ namespace SAV_Backend.Migrations
 
             modelBuilder.Entity("SAV_Backend.Models.Article", b =>
                 {
+                    b.Navigation("ClientArticles");
+
                     b.Navigation("Reclamations");
                 });
 
             modelBuilder.Entity("SAV_Backend.Models.Client", b =>
                 {
+                    b.Navigation("ClientArticles");
+
+                    b.Navigation("Notifications");
+
                     b.Navigation("Reclamations");
                 });
 

@@ -14,7 +14,11 @@ namespace SAV_Backend.Configurations
                    .HasForeignKey<Client>(c => c.ApplicationUserId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-        
+            builder.HasMany(c => c.ClientArticles)
+                              .WithOne(ca => ca.Client)
+                              .HasForeignKey(ca => ca.ClientId)
+                              .OnDelete(DeleteBehavior.Cascade);
+
 
         }
     }
