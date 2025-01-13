@@ -8,12 +8,9 @@ export interface Reclamation {
     dateReclamation: Date;
     description: string;
     clientId: number;
-  
     client?: Client; // Remplacez 'Client' par l'interface appropriée si elle existe
     articleId: number;
-  
     article?: Article; // Remplacez 'Article' par l'interface appropriée si elle existe
-  
     statutReclamationId: number;
     statutReclamation?: StatutReclamation; // Remplacez 'StatutReclamation' par l'interface appropriée si elle existe
     interventions?: Intervention[]; // Remplacez 'Intervention' par l'interface appropriée si elle existe

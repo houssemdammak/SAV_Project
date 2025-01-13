@@ -11,6 +11,7 @@ import { ClientService } from 'src/Services/client.service';
 export class MesArticlesComponent {
   cards = [
     {
+      id:'1',
       title: 'Article 1',
       description: 'Description for Article 1',
       imgUrl:
@@ -18,88 +19,38 @@ export class MesArticlesComponent {
       bgColor: 'bg-red-600',
     },
     {
+      id:'2',
       title: 'Article 1',
       description: 'Description for Article 1',
       imgUrl:
         '../../../assets/img/product.jpg',
       bgColor: 'bg-red-600',
     }, {
+      id:'3',
       title: 'Article 1',
       description: 'Description for Article 1',
       imgUrl:
         '../../../assets/img/product.jpg',
       bgColor: 'bg-red-600',
     }, {
+      id:'4',
       title: 'Article 1',
       description: 'Description for Article 1',
       imgUrl:
         '../../../assets/img/product.jpg',
       bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    }, {
-      title: 'Article 1',
-      description: 'Description for Article 1',
-      imgUrl:
-        '../../../assets/img/product.jpg',
-      bgColor: 'bg-red-600',
-    },
+    } 
   ];
 
   constructor(private dialog:MatDialog,private clientService:ClientService){
-    this.clientService.getAllClients().subscribe((data)=>{
-      console.log("data : ", data)
-    })
+    // this.clientService.getAllClients().subscribe((data)=>{
+    //   console.log("data : ", data)
+    // })
   
   }
-  addNewReclamation() {
+  addNewReclamation(articleId:any) {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data={articleId}
     let dialogRef = this.dialog.open(ReclamationModalComponent,dialogConfig);
         dialogRef.afterClosed().subscribe((data)=>{
           if(data){

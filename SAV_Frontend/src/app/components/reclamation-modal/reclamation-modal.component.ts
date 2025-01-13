@@ -9,7 +9,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ReclamationModalComponent implements OnInit{
   form !:FormGroup
   submitted: boolean = false;
-  action="Add"
 
   constructor(
     public dialogRef: MatDialogRef<ReclamationModalComponent>,
@@ -19,13 +18,11 @@ export class ReclamationModalComponent implements OnInit{
   
   ngOnInit(): void {
     if(this.data){
-      this.action="Edit"
+      console.log(this.data)
     }
     this.form = this.fb.group({
-      id: [this.data?.tool?.id || '6'],
-      source: [this.data?.tool?.source || '', Validators.required],
-      date: [this.data?.tool?.date || '', Validators.required],
-      member:[this.data?.tool?.member || '']
+      description: [null , Validators.required],
+      articleId: [this.data?.articleId, Validators.required],
     });
   }
   shouldShowError(fieldName: string): boolean {

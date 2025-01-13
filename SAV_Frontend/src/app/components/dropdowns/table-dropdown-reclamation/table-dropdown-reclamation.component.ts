@@ -2,17 +2,17 @@ import { Component, AfterViewInit, ViewChild, ElementRef, EventEmitter, Output }
 import { createPopper } from "@popperjs/core";
 
 @Component({
-  selector: "app-table-dropdown",
-  templateUrl: "./table-dropdown.component.html",
+  selector: "app-table-dropdown-reclamation",
+  templateUrl: "./table-dropdown-reclamation.component.html",
 })
-export class TableDropdownComponent implements AfterViewInit {
+export class TableDropdownReclamationComponent implements AfterViewInit {
   dropdownPopoverShow = false;
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef!: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   
   popoverDropdownRef!: ElementRef;
-  @Output() edit = new EventEmitter<any>(); // Pour transmettre les données d'édition
-  @Output() delete = new EventEmitter<any>(); // Pour transmettre les données de suppression
+  @Output() intervention = new EventEmitter<any>(); // Pour transmettre les données d'édition
+  @Output() mark = new EventEmitter<any>(); // Pour transmettre les données de suppression
   ngAfterViewInit() {
     createPopper(
       this.btnDropdownRef.nativeElement,
@@ -28,13 +28,13 @@ export class TableDropdownComponent implements AfterViewInit {
   }
 
   // Méthodes pour émettre les événements
-  onEdit() {
-    this.edit.emit('edit'); // Émettre l'événement d'édition avec les données
+  onMark() {
+    this.mark.emit('mark'); // Émettre l'événement d'édition avec les données
     this.toggleDropdown({ preventDefault: () => {} });
   }
 
-  onDelete() {
-    this.delete.emit('delete'); // Émettre l'événement de suppression avec les données
+  onIntervention() {
+    this.intervention.emit('intervention'); // Émettre l'événement de suppression avec les données
     this.toggleDropdown({ preventDefault: () => {} });
   }
 

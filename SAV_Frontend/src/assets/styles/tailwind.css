@@ -2081,7 +2081,9 @@ select {
 .h-70-px {
   height: 70px;
 }
-
+.h-250-px {
+  height: 250px;
+}
 .h-500-px {
   height: 500px;
 }

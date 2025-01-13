@@ -9,7 +9,6 @@ import { AdminComponent } from "./layouts/admin/admin.component";
 import { AuthComponent } from "./layouts/auth/auth.component";
 
 // admin views
-import { MembersAdminComponent } from "./views/admin/members/members.component";
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
@@ -17,8 +16,6 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 
 // no layouts views
 import { IndexComponent } from "./views/index/index.component";
-import { LandingComponent } from "./views/landing/landing.component";
-import { ProfileComponent } from "./views/profile/profile.component";
 
 // components for views and layouts
 
@@ -37,13 +34,11 @@ import { FooterComponent } from "./components/footers/footer/footer.component";
 import { FooterSmallComponent } from "./components/footers/footer-small/footer-small.component";
 import { HeaderStatsComponent } from "./components/headers/header-stats/header-stats.component";
 import { IndexNavbarComponent } from "./components/navbars/index-navbar/index-navbar.component";
-import { MapExampleComponent } from "./components/maps/map-example/map-example.component";
 import { IndexDropdownComponent } from "./components/dropdowns/index-dropdown/index-dropdown.component";
 import { TableDropdownComponent } from "./components/dropdowns/table-dropdown/table-dropdown.component";
 import { PagesDropdownComponent } from "./components/dropdowns/pages-dropdown/pages-dropdown.component";
 import { NotificationDropdownComponent } from "./components/dropdowns/notification-dropdown/notification-dropdown.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
-import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 import { FullCalendarModule } from "@fullcalendar/angular";
 import { MesArticlesComponent } from './views/mesarticles/mesarticles.component';
 import { MatDialogModule } from "@angular/material/dialog";
@@ -60,11 +55,14 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
 import { ReclamationsAdminComponent } from "./views/admin/reclamationsadmin/reclamationsadmin.component";
-import { ToolsComponent } from "./views/admin/tools/tools.component";
+import { ArticlesComponent } from "./views/admin/articles/articles.component";
 import { ReclamationModalComponent } from './components/reclamation-modal/reclamation-modal.component';
 import { InterventionModalComponent } from './components/intervention-modal/intervention-modal.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { TableDropdownReclamationComponent } from "./components/dropdowns/table-dropdown-reclamation/table-dropdown-reclamation.component";
+import { ArticleModalComponent } from "./components/article-modal/article-modal.component";
+import { PiecesComponent } from "./views/admin/pieceRechange/pieces.component";
 
 @NgModule({
   declarations: [
@@ -74,8 +72,8 @@ import { MatSelectModule } from '@angular/material/select';
     IndexDropdownComponent,
     PagesDropdownComponent,
     TableDropdownComponent,
+    TableDropdownReclamationComponent,
     NotificationDropdownComponent,
-    UserDropdownComponent,
     SidebarComponent,
     FooterComponent,
     FooterSmallComponent,
@@ -87,21 +85,17 @@ import { MatSelectModule } from '@angular/material/select';
     CardStatsComponent,
     CardTableComponent,
     HeaderStatsComponent,
-    MapExampleComponent,
     AuthNavbarComponent,
     AdminNavbarComponent,
     IndexNavbarComponent,
     AdminComponent,
     AuthComponent,
-    MembersAdminComponent,
     LoginComponent,
     RegisterComponent,
     IndexComponent,
-    LandingComponent,
-    ProfileComponent,
-    MembersAdminComponent,
     MesArticlesComponent,
-    ModalComponent,ReclamationsAdminComponent,ToolsComponent, ReclamationModalComponent, InterventionModalComponent
+    PiecesComponent,
+    ModalComponent,ReclamationsAdminComponent,ArticlesComponent, ReclamationModalComponent, InterventionModalComponent,ArticleModalComponent
   ],
   imports: [BrowserModule, AppRoutingModule,FormsModule,MatOptionModule,
     ReactiveFormsModule,MatFormFieldModule

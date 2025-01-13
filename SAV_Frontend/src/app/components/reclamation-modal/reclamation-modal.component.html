@@ -8,7 +8,7 @@
       class="relative m-4 p-4 w-full rounded-lg bg-white shadow-sm"
     >
       <div class="flex shrink-0 items-center pb-4 text-xl font-medium text-slate-800">
-        {{action}} tool 
+        Ajout Reclamation  
       </div>
       <div class="relative border-t border-slate-200 py-4 leading-normal text-slate-600 font-light">
         <form [formGroup]="form" >
@@ -16,60 +16,18 @@
             <div class="form-group">
               <!-- Champ Source -->
               <div class="w-full max-w-md min-w-[200px]">
-                <label>Source</label>
-                <input formControlName="source" type="text" placeholder="Enter Source" 
-                class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-4 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"/>
+                <label>Description</label>
+                <textarea formControlName="description" type="text" placeholder="Decrire votre probleme" 
+                class="w-full h-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-4 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+              </textarea>
                 <span
                 *ngIf="submitted && form.get('source')?.hasError('required')"
                 class="text-sm text-red-500 mt-1 block"
               >
-                Source is required
+                Description is required
               </span>
             </div>
             </div>
-          
-            <div class="form-group">
-              <!-- Champ Date avec le Datepicker -->
-              <div class="w-full max-w-sm min-w-[200px]">
-                <label>Date</label>
-                <div class="flex items-center relative">
-                  <input
-                    type="text"
-                    readonly
-                    placeholder="Select a date"
-                    [matDatepicker]="picker"
-                    class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-4 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"                    
-                    formControlName="date"
-                  />              
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                    class="absolute right-0 top-1/2 transform -translate-y-1/2"
-                  ></mat-datepicker-toggle>
-                </div>
-                
-                <mat-datepicker #picker></mat-datepicker>
-                <span
-                *ngIf="form.get('date')?.hasError('required') && submitted "
-                class="text-sm text-red-500 mt-1 block"
-              >
-                Date is required
-              </span>
-               
-              </div>
-              
-            </div>
-          
-            <!-- <div class="form-group">
-              <div class="w-full max-w-sm min-w-[200px]">
-                <label>Member</label> -->
-                <!-- <input matInput formControlName="Member" type="text" placeholder="Enter Member" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" /> -->
-                <!-- <mat-error *ngIf="form.get('Member')?.hasError('required')">
-                  Member is required
-                </mat-error> -->
-            <!-- </div>
-            </div> -->
- 
           </form>
           
       </div>
@@ -79,7 +37,7 @@
           Cancel
         </button>
         <button  (click)="onSubmit()"  data-dialog-close="true" class="rounded-md bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="submit">
-          Confirm
+          Save
         </button>
       </div>
     </div>

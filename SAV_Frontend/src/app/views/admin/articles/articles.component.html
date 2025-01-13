@@ -6,10 +6,16 @@
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3
-                class="font-semibold text-lg "        >
-                Reclamations
+                class="font-semibold text-lg ">
+                Articles
               </h3>
+
             </div>
+            <button (click)="addNew()"
+            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            type="button">
+                Ajout Article
+          </button>
           </div>
         </div>
         <div class="block w-full overflow-x-auto">
@@ -19,8 +25,15 @@
               <tr>
                 <th
                   class="px-6 align-middle  border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  
                 >
                   ID
+                </th>
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  
+                >
+                  Nom  
                 </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -32,77 +45,45 @@
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                   
                 >
-                  Status 
+                  Date Fabrication 
                 </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-                  
-                >
-                  Date
-                </th>
-                <th
-                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-                
-              >
-                Client
-              </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-                  
-                >
-                  Article
-                </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-                  
-                ></th>
+               
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let reclamation of reclamations">
+              <tr *ngFor="let article of articles">
                 <th
-                  class="border-t-0  align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
+                  class="border-t-0 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
                 >
-                  
-                  <span
-                    class="ml-3 font-bold text-blueGray-600"
-                  >
-                  {{ reclamation.id }}
+                  <span class="ml-3 font-bold text-blueGray-600">
+                    {{ article.id }}
                   </span>
                 </th>
+            
                 <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                 >
-                {{ reclamation.description }}
+                  {{ article.nom }}
+                </td>
+            
+                <td
+                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                >
+                {{ article.description }}
                 </td>
                 <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                 >
-                  <i class="fas fa-circle text-orange-500 mr-2"></i> {{ reclamation.statutReclamation.libelle }}
-                </td>
-                
-                <td
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                >
-                {{ reclamation.dateReclamation | date:'yyyy-MM-dd' }}
-                </td>
-                <td
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                >
-                {{ reclamation.clientId }}
-                </td>
-                <td
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                >
-                {{ reclamation.articleId }}
+                {{ article.dateFabrication | date:'yyyy-MM-dd'  }}
                 </td>
                 <td
                   class="border-t-0 align-middle border-l-0 border-r-0 text-xs p-4 text-left"
                 >
-                <app-table-dropdown-reclamation (intervention)="handleIntervention($event,'yas')"
-                (mark)="handleOnMark($event,'yas')"></app-table-dropdown-reclamation>
+                  <app-table-dropdown (edit)="handleEdit($event, article)"
+                  (delete)="handleDelete($event, article)"></app-table-dropdown>
                 </td>
               </tr>
+             
             </tbody>
           </table>
         </div>
