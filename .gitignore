@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /SAV_Backend/SAV_Backend/.env
 /SAV_Backend/SAV_Backend/Migrations
+/SAV_Backend/SAV_Backend/Migrations/ApplicationDbContextModelSnapshot.cs
+/SAV_Backend/SAV_Backend/Migrations/20250113004733_create2.cs
+/SAV_Backend/SAV_Backend/Migrations/20250112232121_create.cs
