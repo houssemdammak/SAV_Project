@@ -47,7 +47,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import {MatIconModule} from '@angular/material/icon';
-import { ModalComponent } from "./components/modal/modal.component";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule } from "@angular/common/http";
 import { MatNativeDateModule } from '@angular/material/core'; 
@@ -95,7 +94,7 @@ import { PiecesComponent } from "./views/admin/pieceRechange/pieces.component";
     IndexComponent,
     MesArticlesComponent,
     PiecesComponent,
-    ModalComponent,ReclamationsAdminComponent,ArticlesComponent, ReclamationModalComponent, InterventionModalComponent,ArticleModalComponent
+    ReclamationsAdminComponent,ArticlesComponent, ReclamationModalComponent, InterventionModalComponent,ArticleModalComponent
   ],
   imports: [BrowserModule, AppRoutingModule,FormsModule,MatOptionModule,
     ReactiveFormsModule,MatFormFieldModule
