@@ -48,7 +48,7 @@ namespace SAV_Backend.Services
             return articles;
         }
 
-        public async Task<bool> CreateClient(ClientCreateModel model)
+        public async Task<String> CreateClient(ClientCreateModel model)
         {
             var applicationUser = new ApplicationUser
             {
@@ -59,8 +59,8 @@ namespace SAV_Backend.Services
 
             var result = await _userManager.CreateAsync(applicationUser, model.Password);
             if (!result.Succeeded)
-                /*return string.Join(", ", result.Errors.Select(e => e.Description));*/
-                return false;
+                return string.Join(", ", result.Errors.Select(e => e.Description));
+                //return false;
 
             var client = new Client
             {
@@ -76,7 +76,7 @@ namespace SAV_Backend.Services
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            return true;
+            return "Success";
         }
 
        

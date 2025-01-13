@@ -31,7 +31,7 @@ namespace SAV_Backend.Services
                                          .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<bool> CreateResponsable(ResponsableCreateModel model)
+        public async Task<String> CreateResponsable(ResponsableCreateModel model)
         {
             var applicationUser = new ApplicationUser
             {
@@ -42,7 +42,7 @@ namespace SAV_Backend.Services
 
             var result = await _userManager.CreateAsync(applicationUser, model.Password);
             if (!result.Succeeded)
-                return false;
+                return string.Join(", ", result.Errors.Select(e => e.Description));
 
             var respo = new ResponsableSAV
             {
@@ -56,7 +56,7 @@ namespace SAV_Backend.Services
             _context.ResponsablesSAV.Add(respo);
             await _context.SaveChangesAsync();
 
-            return true; // Return true if successful
+            return "Success"; // Return true if successful
         }
 
 

@@ -36,11 +36,11 @@ namespace SAV_Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateResponsable(ResponsableCreateModel model)
         {
-            var success = await _responsableService.CreateResponsable(model);
-            if (success)
+            var result = await _responsableService.CreateResponsable(model);
+            if (result == "Success")
                 return Ok("User and Responsable created successfully.");
 
-            return BadRequest("Error creating Responsable.");
+            return BadRequest(result);
         }
 
 

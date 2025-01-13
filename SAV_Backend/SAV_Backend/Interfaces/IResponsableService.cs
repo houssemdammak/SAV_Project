@@ -7,7 +7,7 @@ namespace SAV_Backend.Interfaces
     {
         Task<IEnumerable<ResponsableSAV>> GetResponsables();
         Task<ResponsableSAV?> GetResponsableById(int id);
-        Task<bool> CreateResponsable(ResponsableCreateModel model);
+        Task<String> CreateResponsable(ResponsableCreateModel model);
         Task<bool> UpdateResponsable(int id, ResponsableSAV Responsable);
         Task<bool> DeleteResponsable(int id);
     }
