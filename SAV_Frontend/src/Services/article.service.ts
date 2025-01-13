@@ -2,28 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from '../Models/Article';
+import { ArticleCreateModel } from 'src/Dtos/ArticleCreateModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
   constructor(private http:HttpClient) { }
-  getAllEvents():Observable<Article[]>{
-    //type de retourne est une observable qui contient la liste des members
-    return this.http.get<Article[]>('http://localhost:3000/event')
+  getAllArticles():Observable<Article[]>{
+    return this.http.get<Article[]>('https://localhost:7185/api/Article')
   }
-  getEvent(id:String):Observable<Article>{
-    //type de retourne est une observable qui contient la liste des members
-    return this.http.get<Article>(`http://localhost:3000/event/${id}`)
+  getArticle(id:number):Observable<Article>{
+    return this.http.get<Article>(`https://localhost:7185/api/Article/${id}`)
   }
-  delete(eventId:string):Observable<void>{
-    return this.http.delete<void>(`http://localhost:3000/event/${eventId}`)
+  delete(id:number):Observable<void>{
+    return this.http.delete<void>(`https://localhost:7185/api/Article/${id}`)
   }
-  add(event:Article):Observable<void>{
-    return this.http.post<void>('http://localhost:3000/event',event)
+  add(article:ArticleCreateModel):Observable<void>{
+    return this.http.post<void>('https://localhost:7185/api/Article',article)
   }
-  edit(id:string,event:Article):Observable<void>{
-    return this.http.put<void>(`http://localhost:3000/event/${id}`,event)
+  edit(id:number,article:Article):Observable<void>{
+    return this.http.put<void>(`https://localhost:7185/api/Article/${id}`,article)
 
   }
 }

@@ -1,30 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ReclamationAdditionDto } from 'src/Dtos/ReclamtionAdditionDto';
 import { Reclamation } from 'src/Models/Reclamation';
-// decorateur permet au service d'etre injecter ou utiliser par des autre services et composante 
 @Injectable({
-  providedIn: 'root' //etre disponible pour tout les composant du route 
+  providedIn: 'root' 
 })
-export class MemberService {
+export class ReclamationService {
 //fonction crud sur member
   constructor(private http:HttpClient) { }
-  getAllMembers():Observable<Reclamation[]>{
+  getAllReclamations():Observable<Reclamation[]>{
     //type de retourne est une observable qui contient la liste des Reclamations
-    return this.http.get<Reclamation[]>('http://localhost:3000/Reclamations')
+    return this.http.get<Reclamation[]>('https://localhost:7185/api/Reclamation')
   }
-  getReclamation(id:String):Observable<Reclamation>{
+
+  getReclamation(id:number):Observable<Reclamation>{
     //type de retourne est une observable qui contient la liste des Reclamations
-    return this.http.get<Reclamation>(`http://localhost:3000/Reclamations/${id}`)
+    return this.http.get<Reclamation>(`https://localhost:7185/Reclamation/${id}`)
   }
-  add(Reclamation:Reclamation):Observable<void>{
-    return this.http.post<void>('http://localhost:3000/Reclamations',Reclamation)
+  add(Reclamation:ReclamationAdditionDto):Observable<void>{
+    return this.http.post<void>('https://localhost:7185/api/Reclamation',Reclamation)
   }
-  delete(ReclamationId:string):Observable<void>{
-    return this.http.delete<void>(`http://localhost:3000/Reclamations/${ReclamationId}`)
+  delete(ReclamationId:number):Observable<void>{
+    return this.http.delete<void>(`https://localhost:7185/api/Reclamation/${ReclamationId}`)
   }
-  edit(id:string,Reclamation:Reclamation):Observable<void>{
-    return this.http.put<void>(`http://localhost:3000/Reclamations/${id}`,Reclamation)
+  edit(id:number,Reclamation:Reclamation):Observable<void>{
+    return this.http.put<void>(`https://localhost:7185/Reclamation/${id}`,Reclamation)
 
   }
 }
