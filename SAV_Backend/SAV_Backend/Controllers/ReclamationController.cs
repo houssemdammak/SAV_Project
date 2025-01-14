@@ -39,6 +39,7 @@ namespace SAV_Backend.Controllers
             return Ok(reclamation);
         }
 
+
         // POST: api/Reclamation
         [HttpPost]
         public async Task<IActionResult> CreateReclamation([FromBody] ReclamationCreateModel model)
@@ -50,9 +51,9 @@ namespace SAV_Backend.Controllers
 
             var result = await _reclamationService.CreateReclamation(model);
 
-            if (result)
+            if (result!=null)
             {
-                return CreatedAtAction(nameof(GetReclamationById), new { id = model.Id }, model);
+                return CreatedAtAction(nameof(GetReclamationById), new { id = result.Id }, result);
             }
 
             return StatusCode(500, new { message = "An error occurred while creating the reclamation." });

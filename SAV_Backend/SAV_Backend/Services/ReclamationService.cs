@@ -30,11 +30,12 @@ namespace SAV_Backend.Services
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<bool> CreateReclamation(ReclamationCreateModel model)
+
+        public async Task<Reclamation?> CreateReclamation(ReclamationCreateModel model)
         {
             if (model == null)
             {
-                return false; // Handle null input gracefully
+                return null; // Handle null input gracefully
             }
 
             try
@@ -52,12 +53,12 @@ namespace SAV_Backend.Services
 
                 await _context.SaveChangesAsync();
 
-                return true; 
+                return reclamation; 
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error creating reclamation: {ex.Message}");
-                return false; 
+                return null; 
             }
         }
         public async Task<bool> DeleteReclamation(int id)

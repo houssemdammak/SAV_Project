@@ -49,13 +49,16 @@ namespace SAV_Backend.Controllers
             if (result.Succeeded)
             {
                 string userType;
+                int userID=0;
                 if (user.Client != null)
                 {
                     userType = "Client";
+                    userID = user.Client.Id;
                 }
                 else if (user.ResponsableSAV != null)
                 {
                     userType = "ResponsableSAV";
+                    userID = user.ResponsableSAV.Id;
                 }
                 else
                 {
@@ -64,7 +67,7 @@ namespace SAV_Backend.Controllers
 
                 // Generate a JWT token
                 var token = GenerateJwtToken(user, userType);
-                return Ok(new { token, userType });
+                return Ok(new { token, userType, userID });
             }
 
             if (result.IsLockedOut)

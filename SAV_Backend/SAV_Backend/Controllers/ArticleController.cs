@@ -46,14 +46,15 @@ namespace SAV_Backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _articleService.CreateArticle(model);
-            if (result)
+            var createdArticle = await _articleService.CreateArticle(model);
+            if (createdArticle != null)
             {
-                return CreatedAtAction(nameof(GetArticleById), new { id = model.Id }, model);
+                return CreatedAtAction(nameof(GetArticleById), new { id = createdArticle.Id }, createdArticle);
             }
 
             return StatusCode(500, new { message = "An error occurred while creating the article." });
         }
+
 
         // PUT: api/Article/{id}
         [HttpPut("{id}")]

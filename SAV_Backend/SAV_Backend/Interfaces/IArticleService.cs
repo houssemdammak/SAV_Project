@@ -7,7 +7,7 @@ namespace SAV_Backend.Interfaces
     {
         Task<IEnumerable<Article>> GetArticles();
         Task<Article?> GetArticleById(int id);
-        Task<bool> CreateArticle(ArticleCreateModel model);
+        Task<Article> CreateArticle(ArticleCreateModel model);
         Task<bool> UpdateArticle(int id, Article updatedArticle);
         Task<bool> DeleteArticle(int id);
     }

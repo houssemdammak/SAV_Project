@@ -7,7 +7,7 @@ namespace SAV_Backend.Interfaces
     {
         Task<IEnumerable<Reclamation>> GetReclamations();
         Task<Reclamation?> GetReclamationById(int id);
-        Task<bool> CreateReclamation(ReclamationCreateModel model);
+        Task<Reclamation?> CreateReclamation(ReclamationCreateModel model);
         Task<bool> DeleteReclamation(int id);
         Task<bool> UpdateReclamation(int id, Reclamation updatedReclamation);
 

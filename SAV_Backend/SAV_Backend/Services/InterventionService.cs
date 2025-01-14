@@ -50,7 +50,7 @@ namespace SAV_Backend.Services
 
             if (reclamation == null || reclamation.Article == null)
             {
-                throw new KeyNotFoundException("Reclamation or related Article not found");
+                throw new KeyNotFoundException("Reclamation not found");
             }
 
             var article = reclamation.Article;
