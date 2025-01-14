@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
+import { ClientService } from "src/Services/client.service";
 
 @Component({
   selector: "app-admin-navbar",
@@ -7,7 +8,7 @@ import { NavigationEnd, Router } from "@angular/router";
 })
 export class AdminNavbarComponent implements OnInit {
   currentUrl: string = '';
-  constructor(private router: Router) {}
+  constructor(private router: Router,private clientService:ClientService) {}
 
   ngOnInit(): void {
     // Écouter les changements de navigation
@@ -16,5 +17,8 @@ export class AdminNavbarComponent implements OnInit {
         this.currentUrl = event.urlAfterRedirects.split("/")[2];
       }
     });
+  }
+  logout():void{
+    this.clientService.logout()
   }
 }

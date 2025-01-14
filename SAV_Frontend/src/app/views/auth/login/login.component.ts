@@ -21,7 +21,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.clientService.login(this.loginForm.value).subscribe(
         (data) => {
-          this.router.navigate(['/'])
+          if (data.userType === 'Client') {
+            this.router.navigate(['/']);
+          } else if (data.userType === 'ResponsableSAV') {
+            this.router.navigate(['/admin']);
+          }         
         },
         (error) => {
           console.error('Login error:', error);

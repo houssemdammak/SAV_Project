@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ReclamationAdditionDto } from 'src/Dtos/ReclamtionAdditionDto';
+import { ReclamationAdditionDto } from 'src/Dtos/ReclamationAdditionDto';
 import { Reclamation } from 'src/Models/Reclamation';
 @Injectable({
   providedIn: 'root' 
@@ -26,6 +26,5 @@ export class ReclamationService {
   }
   edit(id:number,Reclamation:Reclamation):Observable<void>{
     return this.http.put<void>(`https://localhost:7185/Reclamation/${id}`,Reclamation)
-
   }
 }

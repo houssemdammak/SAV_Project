@@ -42,7 +42,7 @@ namespace SAV_Backend.Controllers
                 return BadRequest(result);
             else
             {
-                return Ok("User and client created successfully.");
+                return Ok();
 
             }
         }

@@ -5,5 +5,5 @@ export interface InterventionCreateModel{
       //estGratuit?: boolean;
       reclamationId: number;
       responsableSAVId: number;
-      piecesIds?: number[];
+      pieceIds?: number[];
 }

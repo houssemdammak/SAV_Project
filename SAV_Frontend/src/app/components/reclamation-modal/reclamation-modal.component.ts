@@ -17,9 +17,6 @@ export class ReclamationModalComponent implements OnInit{
   ) {}
   
   ngOnInit(): void {
-    if(this.data){
-      console.log(this.data)
-    }
     this.form = this.fb.group({
       description: [null , Validators.required],
       articleId: [this.data?.articleId, Validators.required],

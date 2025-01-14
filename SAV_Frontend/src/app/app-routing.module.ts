@@ -17,32 +17,46 @@ import { IndexComponent } from "./views/index/index.component";
 import { MesArticlesComponent } from './views/mesarticles/mesarticles.component';
 import { ArticlesComponent } from "./views/admin/articles/articles.component";
 import { PiecesComponent } from "./views/admin/pieceRechange/pieces.component";
-const routes: Routes = [
+import { authGuard } from "src/guards/auth.guard";
+export const routes: Routes = [
   // admin views
   {
-    path: "admin",
+    path: 'admin',
     component: AdminComponent,
+    canActivate: [authGuard],
+    data: { roles: ['ResponsableSAV'] },
     children: [
-      { path: "piecesrechange", component: PiecesComponent },
-      { path: "reclamationsadmin", component: ReclamationsAdminComponent },
-      { path: "articles", component: ArticlesComponent },
-      { path: "", redirectTo: "tools", pathMatch: "full" },
+      { path: 'piecesrechange', component: PiecesComponent },
+      { path: 'reclamationsadmin', component: ReclamationsAdminComponent },
+      { path: 'articles', component: ArticlesComponent },
+      { path: '', redirectTo: 'reclamationsadmin', pathMatch: 'full' },
     ],
   },
   // auth views
   {
-    path: "auth",
+    path: 'auth',
     component: AuthComponent,
     children: [
-      { path: "login", component: LoginComponent },
-       { path: "register", component: RegisterComponent },
-      { path: "", redirectTo: "login", pathMatch: "full" },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
-  // no layout views
-  { path: "articles", component: MesArticlesComponent },
-  { path: "", component: IndexComponent },
-  { path: "**", redirectTo: "", pathMatch: "full" },
+  // client views
+  {
+    path: 'articles',
+    component: MesArticlesComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Client'] },
+  },
+  {
+    path: '',
+    component: IndexComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Client'] },
+  },
+  // fallback route
+  { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
 ];
 
 @NgModule({

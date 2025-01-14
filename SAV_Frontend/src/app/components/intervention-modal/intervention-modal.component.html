@@ -11,7 +11,7 @@
       Créer une Intervention
     </div>
     <div class="relative border-t border-slate-200 py-4 leading-normal text-slate-600 font-light">
-      <form [formGroup]="pieceForm">
+      <form >
         <div class="form-group">
           <div class="w-full max-w-md min-w-[200px]">
             <label class="block text-sm font-medium text-gray-700">Sélectionnez des pièces</label>
@@ -32,24 +32,26 @@
                     <td class="py-2 px-4 border-b">
                       <input type="checkbox" 
                              (change)="onPieceSelect(piece)" 
-                             [checked]="selectedPieces.includes(piece)" 
+                             [checked]="selectedPieces.includes(piece.id)" 
                              class="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded">
                     </td>
-                    <td class="py-2 px-4 border-b">{{ piece.Id }}</td>
-                    <td class="py-2 px-4 border-b">{{ piece.Nom }}</td>
-                    <td class="py-2 px-4 border-b">{{ piece.Stock }}</td>
+                    <td class="py-2 px-4 border-b">{{ piece.id }}</td>
+                    <td class="py-2 px-4 border-b">{{ piece.nom }}</td>
+                    <td class="py-2 px-4 border-b">{{ piece.stock }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
       
             <!-- Affichage des pièces sélectionnées -->
-            <!-- <div class="mt-4">
-              <label class="block text-sm font-medium text-gray-700">Pièces sélectionnées :</label>
-              <ul>
-                <li *ngFor="let selected of selectedPieces">{{ selected.Nom }}</li>
-              </ul>
-            </div> -->
+            <div class="mt-4">
+              <span
+                *ngIf="modalErreur"
+                class="text-sm text-red-500 mt-1 block"
+              >
+             {{modalErreur}}
+              </span>
+            </div>
           </div>
         </div>
       

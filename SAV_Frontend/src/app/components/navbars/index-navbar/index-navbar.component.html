@@ -39,7 +39,7 @@
       id="example-navbar-warning"
     >
       <ul class="flex flex-col lg:flex-row list-none mr-auto">
-        <li class="flex items-center">
+        <li class="flex items-center" *ngIf="isClient"        >
           <a [routerLink]="['/articles']"
             class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
           >
@@ -50,7 +50,7 @@
       </ul>
 
       <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
-        <li class="flex items-center">
+        <li class="flex items-center"  *ngIf="!isClient">
           <a
           class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
           href="#pablo"
@@ -58,7 +58,8 @@
           #btnDropdownRef
         >
           Admin Access
-        </a>        </li>
+        </a>        
+      </li>
         <!-- <li class="flex items-center">
           <a
             class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
@@ -94,13 +95,14 @@
 
         <li class="flex items-center">
           <button
+            (click)="logout()"
             class="bg-red-600 text-white active:bg-red-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
             type="button"
             [routerLink]="['/auth/login']"
 
           >
             <i class="fas fa-solid fa-arrow-right-to-bracket"></i>
-            Login
+            logout
           </button>
         </li>
       </ul>

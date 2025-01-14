@@ -66,7 +66,7 @@ namespace SAV_Backend.Services
                 model.EstGratuit = false;
                 
 
-                if (model.PieceIds != null && model.PieceIds.Any())
+                if (model.PieceIds != null )
                 {
                     var dbPieces = await _context.Pieces
                         .Where(p => model.PieceIds.Contains(p.Id))
@@ -86,9 +86,9 @@ namespace SAV_Backend.Services
 
                     // Add total pieces cost to the invoice amount
                     model.MontantFacture += totalPiecesCost;
-                    reclamation.StatutReclamationId = 2;
                 }
             }
+            reclamation.StatutReclamationId = 2;
 
             var intervention = new Intervention
             {

@@ -22,7 +22,6 @@ export class ArticleModalComponent implements OnInit{
       this.action="Edit"
     }
     this.form = this.fb.group({
-      id: [this.data?.article?.id || '6'],
       nom: [this.data?.article?.nom || '', Validators.required],
       description: [this.data?.article?.description || '', Validators.required],
       dateFabrication:[this.data?.article?.dateFabrication || '',Validators.required]
