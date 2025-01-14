@@ -11,6 +11,7 @@ namespace SAV_Backend.Interfaces
         Task<bool> DeleteReclamation(int id);
         Task<bool> UpdateReclamation(int id, Reclamation updatedReclamation);
         Task<bool> MarkCompleted(int reclamationID, int responsableID);
+        Task<IEnumerable<Reclamation?>> GetReclamationsByClient(int clientId);
 
 
 

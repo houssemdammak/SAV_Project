@@ -6,5 +6,8 @@ namespace SAV_Backend.Interfaces
     {
         Task<IEnumerable<NotificationClient>> GetNotifications();
         Task<NotificationClient?> GetNotification(int id);
+        Task<IEnumerable<NotificationClient>> GetNotificationByClientId(int clientId);
+        Task<bool> MarkAsRead(int notificationId);
+        Task MarkNotificationsAsReadAsync(List<int> notificationIds);
     }
 }

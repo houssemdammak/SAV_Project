@@ -52,7 +52,7 @@ namespace SAV_Backend.Controllers
 
             var result = await _reclamationService.CreateReclamation(model);
 
-            if (result!=null)
+            if (result != null)
             {
                 return CreatedAtAction(nameof(GetReclamationById), new { id = result.Id }, result);
             }
@@ -102,6 +102,16 @@ namespace SAV_Backend.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+        [HttpGet("ClientReclamations/{clientId}")]
+        public async Task<IActionResult> GetReclamationsByClient(int clientId)
+        {
+            var reclamations = await _reclamationService.GetReclamationsByClient(clientId);
+            if (reclamations == null)
+            {
+                return NotFound();
+            }
+            return Ok(reclamations);
         }
 
     }

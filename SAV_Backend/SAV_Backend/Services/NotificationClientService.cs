@@ -27,5 +27,37 @@ namespace SAV_Backend.Services
             return await _context.NotificationClients
                 .FirstOrDefaultAsync(c => c.NotificationClientId == id);
         }
+
+        public async Task<IEnumerable<NotificationClient>> GetNotificationByClientId(int clientId)
+        {
+            return await _context.NotificationClients.Include(n => n.client).Where(n=>n.ReceiverId==clientId).ToListAsync();
+        }
+        public async Task<bool> MarkAsRead(int notificationId)
+        {
+            var notification = await _context.NotificationClients
+                .FirstOrDefaultAsync(n => n.NotificationClientId == notificationId);
+
+            if (notification == null)
+            {
+                return false;
+            }
+            notification.IsRead = true;
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        public async Task MarkNotificationsAsReadAsync(List<int> notificationIds)
+        {
+            var notifications = await _context.NotificationClients
+                .Where(n => notificationIds.Contains(n.NotificationClientId))
+                .ToListAsync();
+
+            foreach (var notification in notifications)
+            {
+                notification.IsRead = true;
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

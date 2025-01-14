@@ -143,6 +143,14 @@ namespace SAV_Backend.Services
         }
 
 
+        public async Task<IEnumerable<Reclamation?>> GetReclamationsByClient(int clientId)
+        {
+            return await _context.Reclamations.Include(r => r.Interventions).ThenInclude(i => i.Pieces)
+                .Include(r => r.StatutReclamation).Where(r => r.ClientId == clientId).ToListAsync();
+            }
+
+
+
 
     }
 }
