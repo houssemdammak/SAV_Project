@@ -112,6 +112,35 @@ namespace SAV_Backend.Services
                 return false; // Indicate failure
             }
         }
+        public async Task<bool> MarkCompleted(int reclamationID,int responsableID)
+        {
+            
+            var reclamation = await _context.Reclamations
+              .Include(r => r.Article)
+              .FirstOrDefaultAsync(r => r.Id == reclamationID);
+
+            if (reclamation == null)
+            {
+                return false;
+            }
+
+            reclamation.StatutReclamationId = 3;
+            var notification = new NotificationClient
+            {
+
+                SenderId = responsableID,
+                SenderName = await _context.ResponsablesSAV
+                   .Where(r => r.Id == responsableID)
+                   .Select(r => r.Nom)
+                   .FirstOrDefaultAsync() ?? "Unknown", // Replace with actual logic to fetch the sender's name
+                ReceiverId = reclamation.ClientId, // Assuming reclamation has a ClientId field
+                Message = "Your article intervention is Terminated",
+                CreatedAt = DateTime.Now
+            };
+            _context.NotificationClients.Add(notification);
+            await _context.SaveChangesAsync();
+            return true;
+        }
 
 
 

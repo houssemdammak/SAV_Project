@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SAV_Backend.Dto;
 using SAV_Backend.Interfaces;
 using SAV_Backend.Models;
+using SAV_Backend.Services;
 
 namespace SAV_Backend.Controllers
 {
@@ -89,6 +90,19 @@ namespace SAV_Backend.Controllers
             return NoContent(); // Successfully updated
         }
 
+        [HttpPost("MarkCompleted/{reclamationID}/{responsableID}")]
+        public async Task<IActionResult> MarkCompleted(int reclamationID, int responsableID)
+        {
+            try
+            {
+                var CompletedReclamation = await _reclamationService.MarkCompleted(reclamationID, responsableID);
+                return CreatedAtAction(nameof(GetReclamationById), new { id = reclamationID }, CompletedReclamation);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }

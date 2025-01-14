@@ -10,6 +10,7 @@ namespace SAV_Backend.Interfaces
         Task<Reclamation?> CreateReclamation(ReclamationCreateModel model);
         Task<bool> DeleteReclamation(int id);
         Task<bool> UpdateReclamation(int id, Reclamation updatedReclamation);
+        Task<bool> MarkCompleted(int reclamationID, int responsableID);
 
 
 

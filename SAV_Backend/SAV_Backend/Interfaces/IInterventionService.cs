@@ -8,7 +8,6 @@ namespace SAV_Backend.Interfaces
         Task<IEnumerable<Intervention>> GetAllInterventionsAsync();
         Task<Intervention> GetInterventionByIdAsync(int id);
         Task<Intervention> CreateInterventionAsync(InterventionCreateModel model);
-        Task<bool> DeleteInterventionAsync(int id);
-    }
+        Task<bool> DeleteInterventionAsync(int id)    }
 
 }

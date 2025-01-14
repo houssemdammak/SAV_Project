@@ -107,6 +107,16 @@ namespace SAV_Backend.Controllers
         {
             return Ok("This is a protected endpoint.");
         }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            // Additional logic for JWT invalidation if implemented
+            return Ok(new { message = "Logged out successfully." });
+        }
+
     }
+
 
 }

@@ -51,6 +51,9 @@ namespace SAV_Backend.Controllers
                 return BadRequest(e.Message);
             }
         }
+       
+
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIntervention(int id)
