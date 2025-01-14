@@ -86,6 +86,7 @@ namespace SAV_Backend.Services
 
                     // Add total pieces cost to the invoice amount
                     model.MontantFacture += totalPiecesCost;
+                    reclamation.StatutReclamationId = 2;
                 }
             }
 
@@ -99,7 +100,6 @@ namespace SAV_Backend.Services
                 ResponsableSAVId = model.ResponsableSAVId,
                 Pieces = model.PieceIds != null ? await _context.Pieces.Where(p => model.PieceIds.Contains(p.Id)).ToListAsync() : null
             };
-
             // Add and save the intervention
             _context.Interventions.Add(intervention);
             await _context.SaveChangesAsync();
