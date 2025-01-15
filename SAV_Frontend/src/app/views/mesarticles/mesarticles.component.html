@@ -2,21 +2,14 @@
 
 <section class="mt-20 pb-12 p-4 bg-blueGray-100">
 <div class="flex justify-center mb-7-20 pb-12 p-4 bg-blueGray-100"><p class="text-3xl font-light bold ">Mes Articles</p></div>
-    <div class="container mx-auto">
-      <div class="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="container  mx-auto">
+      <div class="grid pt-10 grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           *ngFor="let card of cards"
           class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col"
         >
           <div class="relative p-2  flex flex-col md:flex-row my-6 rounded-lg w-full">
-            <!-- <div class="relative md:w-4/12 p-2.5 flex  flex-col items-center   shrink-0 overflow-hidden">
-              <img
-                src="../../../assets/img/product.jpg"  alt="card-image"
-                class="h-20 w-20 rounded-full items-center border-none shadow-lg md:rounded-lg object-cover"
-              />
-             
-              
-            </div> -->
+          
             <div class="p-6 mx-4">
               <h4 class="mb-2 text-slate-800 text-xl font-semibold">{{card.nom}}
               </h4>

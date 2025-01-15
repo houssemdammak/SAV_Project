@@ -26,6 +26,5 @@ export class InterventionService {
     }
     edit(id:number,intervention:Intervention):Observable<void>{
       return this.http.put<void>(`https://localhost:7185/Intervention/${id}`,intervention)
-  
     }
 }

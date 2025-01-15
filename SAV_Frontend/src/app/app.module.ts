@@ -62,6 +62,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { TableDropdownReclamationComponent } from "./components/dropdowns/table-dropdown-reclamation/table-dropdown-reclamation.component";
 import { ArticleModalComponent } from "./components/article-modal/article-modal.component";
 import { PiecesComponent } from "./views/admin/pieceRechange/pieces.component";
+import { MesreclamationsComponent } from './views/mesreclamations/mesreclamations.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,7 @@ import { PiecesComponent } from "./views/admin/pieceRechange/pieces.component";
     IndexComponent,
     MesArticlesComponent,
     PiecesComponent,
-    ReclamationsAdminComponent,ArticlesComponent, ReclamationModalComponent, InterventionModalComponent,ArticleModalComponent
+    ReclamationsAdminComponent,ArticlesComponent, ReclamationModalComponent, InterventionModalComponent,ArticleModalComponent, MesreclamationsComponent
   ],
   imports: [BrowserModule, AppRoutingModule,FormsModule,MatOptionModule,
     ReactiveFormsModule,MatFormFieldModule

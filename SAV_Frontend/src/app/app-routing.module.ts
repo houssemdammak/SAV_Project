@@ -18,6 +18,7 @@ import { MesArticlesComponent } from './views/mesarticles/mesarticles.component'
 import { ArticlesComponent } from "./views/admin/articles/articles.component";
 import { PiecesComponent } from "./views/admin/pieceRechange/pieces.component";
 import { authGuard } from "src/guards/auth.guard";
+import { MesreclamationsComponent } from "./views/mesreclamations/mesreclamations.component";
 export const routes: Routes = [
   // admin views
   {
@@ -46,6 +47,12 @@ export const routes: Routes = [
   {
     path: 'articles',
     component: MesArticlesComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Client'] },
+  },
+  {
+    path: 'reclamations',
+    component: MesreclamationsComponent,
     canActivate: [authGuard],
     data: { roles: ['Client'] },
   },

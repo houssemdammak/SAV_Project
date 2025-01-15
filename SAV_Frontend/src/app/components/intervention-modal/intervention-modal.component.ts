@@ -27,7 +27,6 @@ export class InterventionModalComponent {
   modalErreur=''
   constructor(public dialogRef: MatDialogRef<InterventionModalComponent>, private fb: FormBuilder,private pieceService:PieceService) {
     this.pieceService.getAllPieces().subscribe((data)=>{
-      console.log(data)
       this.piecesList=data 
     })
 
@@ -55,7 +54,6 @@ export class InterventionModalComponent {
   valider(): void {
     if (this.selectedPieces.length>0) {
       this.modalErreur=''
-      // console.log('Pièces sélectionnées:', this.selectedPieces);
       this;this.dialogRef.close(this.selectedPieces)
     }
     

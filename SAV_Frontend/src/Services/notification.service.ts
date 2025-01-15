@@ -13,7 +13,10 @@ export class NotificationService {
     return this.http.get<NotificationClient[]>('https://localhost:7185/api/NotificationCLient')
   }
 
-  getNotificationCLient(id:number):Observable<NotificationClient>{
-    return this.http.get<NotificationClient>(`https://localhost:7185/NotificationCLient/${id}`)
+  getNotificationCLient(idClient:number):Observable<NotificationClient[]>{
+    return this.http.get<NotificationClient[]>(`https://localhost:7185/api/NotificationCLient/clientNotifications/${idClient}`)
+  }
+  markAsRead(listNotif:any):Observable<void>{
+    return this.http.post<void>('https://localhost:7185/api/NotificationCLient/markManyNotificationAsRead',listNotif)
   }
 }

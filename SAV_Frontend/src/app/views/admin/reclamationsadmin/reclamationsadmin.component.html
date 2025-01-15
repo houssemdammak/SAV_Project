@@ -78,7 +78,11 @@
                 <td
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                 >
-                  <i class="fas fa-circle text-orange-500 mr-2"></i> {{ reclamation.statutReclamation.name }}
+                  <i class="fas fa-circle mr-2" [ngClass]="{
+                    'text-red-500': reclamation.statutReclamation.name === 'En attente',
+                    'text-blue-500': reclamation.statutReclamation.name === 'En cours',
+                    'text-green-500': reclamation.statutReclamation.name === 'Terminée'
+                  }"></i> {{ reclamation.statutReclamation.name }}
                 </td>
                 
                 <td
@@ -100,7 +104,7 @@
                   class="border-t-0 align-middle border-l-0 border-r-0 text-xs p-4 text-left"
                 >
                 <app-table-dropdown-reclamation (intervention)="handleIntervention($event,reclamation.id )"
-                (mark)="handleOnMark($event,reclamation.articleId )"></app-table-dropdown-reclamation>
+                (mark)="handleOnMark($event,reclamation.id )"></app-table-dropdown-reclamation>
                 </td>
               </tr>
             </tbody>

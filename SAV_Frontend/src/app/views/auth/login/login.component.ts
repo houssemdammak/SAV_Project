@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
           }         
         },
         (error) => {
-          console.error('Login error:', error);
           if (error.status === 401) {
             if (error.error === 'Invalid password') {
               this.loginForm.controls['password'].setErrors({

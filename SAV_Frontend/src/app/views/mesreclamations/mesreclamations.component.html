@@ -1,0 +1,77 @@
+<app-index-navbar></app-index-navbar>
+
+<section class="mt-20 pb-12 p-4 bg-blueGray-100">
+    <div class="flex justify-center mb-7-20 pb-12 p-4 bg-blueGray-100">
+        <p class="text-3xl font-light bold ">
+        Mes Reclamations
+        </p>
+    </div>
+    <div class="container  mx-auto">
+        <div class="flex flex-wrap mt-4">
+            <div class="w-full mb-12 px-4">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white">
+               
+                <div class="block w-full overflow-x-auto">
+                  <!-- Projects table -->
+                  <table class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                      <tr>
+
+                        <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                          
+                        >
+                          Description
+                        </th>
+                        <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                          
+                        >
+                          Status 
+                        </th>
+                        <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                          
+                        >
+                          Date
+                        </th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let reclamation of reclamations">
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                        >
+                        {{ reclamation.description }}
+                        </td>
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                        >
+                        <i
+                        class="fas fa-circle mr-2"
+                        [ngClass]="{
+                          'text-red-500': reclamation.statutReclamation.name === 'En attente',
+                          'text-blue-500': reclamation.statutReclamation.name === 'En cours',
+                          'text-green-500': reclamation.statutReclamation.name === 'Terminée'
+                        }"
+                      ></i>
+                      {{ reclamation.statutReclamation.name }}
+                        </td>
+                        
+                        <td
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                        >
+                        {{ reclamation.dateReclamation | date:'yyyy-MM-dd' }}
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+    </div>
+</section>

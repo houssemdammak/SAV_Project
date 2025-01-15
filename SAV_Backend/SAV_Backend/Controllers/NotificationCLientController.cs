@@ -72,7 +72,7 @@ namespace SAV_Backend.Controllers
             }
 
             await _NotifService.MarkNotificationsAsReadAsync(notificationIds);
-            return Ok("Notifications marked as read.");
+            return Ok();
         }
 
 

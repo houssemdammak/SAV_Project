@@ -49,7 +49,6 @@ export class MesArticlesComponent {
     const idUser=this.clientService.getIdUser()
     if(idUser){
     this.clientService.getArticles(idUser).subscribe((data)=>{
-      console.log("data : ", data)
       this.cards=data
     })
   }
@@ -60,10 +59,8 @@ export class MesArticlesComponent {
     let dialogRef = this.dialog.open(ReclamationModalComponent,dialogConfig);
         dialogRef.afterClosed().subscribe((data)=>{
           if(data){
-            console.log({...data,clientId: this.clientService.getIdUser() })
             this.recService.add({...data,clientId: this.clientService.getIdUser() }).subscribe(
               ()=>{
-                console.log("success")            
             },
             (error)=>{
               console.log(error)

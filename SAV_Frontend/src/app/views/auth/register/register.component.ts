@@ -58,8 +58,6 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/']);
         },
         (error) => {
-          console.error('Registration error:', error);
-         
             if (error.error === 'Invalid password') {
               this.registerForm.controls['password'].setErrors({
                 incorrectPassword: true,

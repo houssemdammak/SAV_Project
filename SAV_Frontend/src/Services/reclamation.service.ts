@@ -13,7 +13,9 @@ export class ReclamationService {
     //type de retourne est une observable qui contient la liste des Reclamations
     return this.http.get<Reclamation[]>('https://localhost:7185/api/Reclamation')
   }
-
+  getAllReclamationsByClient(clientid:number):Observable<Reclamation[]>{
+    return this.http.get<Reclamation[]>(`https://localhost:7185/api/Reclamation/ClientReclamations/${clientid}`)
+  }
   getReclamation(id:number):Observable<Reclamation>{
     //type de retourne est une observable qui contient la liste des Reclamations
     return this.http.get<Reclamation>(`https://localhost:7185/Reclamation/${id}`)
@@ -26,5 +28,8 @@ export class ReclamationService {
   }
   edit(id:number,Reclamation:Reclamation):Observable<void>{
     return this.http.put<void>(`https://localhost:7185/Reclamation/${id}`,Reclamation)
+  }
+  markCompleted(reclamationId:number,responsableSAVId: number ):Observable<void>{
+    return this.http.post<void>(`https://localhost:7185/api/Reclamation/MarkCompleted/${reclamationId}/${responsableSAVId}`,null)
   }
 }

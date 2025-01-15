@@ -69,7 +69,6 @@ addNew() {
 
 }
 handleEdit(eventData: any, article: any) {
-  // console.log('Edit Event Data:', eventData);
   const dialogConfig = new MatDialogConfig();
   dialogConfig.data = { article };
   const dialogRef = this.dialog.open(ArticleModalComponent, dialogConfig);

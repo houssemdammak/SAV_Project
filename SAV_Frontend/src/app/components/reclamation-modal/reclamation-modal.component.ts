@@ -32,7 +32,6 @@ export class ReclamationModalComponent implements OnInit{
       this.submitted = false;
       this.dialogRef.close(this.form.value);
     } else {
-      console.log('Formulaire invalide');
     }
   }
 }

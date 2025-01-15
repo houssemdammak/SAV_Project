@@ -39,17 +39,11 @@ export class ClientService {
      getArticles(idClient:number):Observable<Article[]>{
       return this.http.get<Article[]>(`https://localhost:7185/api/Client/articles/${idClient}`)
      }
-    //  login(loginModel:LoginModel):Observable<void>{
-    //   return this.http.post<void>("https://localhost:7185/api/Auth/login",loginModel) 
-    //  }     
-    //  register(registerModel:RegisterModel):Observable<void>{
-    //   return this.http.post<void>("https://localhost:7185/api/Client",registerModel) 
-    //  }
+
      login(loginModel: LoginModel): Observable<{ token: string; userType: string,userID:number }> {
       return this.http.post<{ token: string; userType: string,userID:number }>("https://localhost:7185/api/Auth/login", loginModel).pipe(
         tap((response) => {
           this.saveTokenAnduserType(response.token, response.userType,response.userID);
-          // console.log(this.idUserSubject.getValue())
         })
       );
     }
@@ -71,7 +65,6 @@ export class ClientService {
       return this.tokenSubject.getValue();
     }
     getIdUser(): number {
-      console.log(this.idUserSubject.getValue())
       return this.idUserSubject.getValue();
     }
     getuserType(): string {
