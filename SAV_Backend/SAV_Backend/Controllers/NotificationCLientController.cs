@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SAV_Backend.Interfaces;
@@ -8,6 +9,7 @@ namespace SAV_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class NotificationCLientController : ControllerBase
     {
         private readonly INotificationClientService _NotifService;
@@ -19,6 +21,7 @@ namespace SAV_Backend.Controllers
 
         // GET: api/Article
         [HttpGet]
+        [Authorize(Roles = "Client,ResponsableSAV")]
         public async Task<IActionResult> GetNotifications()
         {
             var notifs = await _NotifService.GetNotifications();
@@ -27,6 +30,7 @@ namespace SAV_Backend.Controllers
 
         // GET: api/Article/{id}
         [HttpGet("{id}")]
+        [Authorize(Roles = "Client,ResponsableSAV")]
         public async Task<IActionResult> GetNotificationById(int id)
         {
             var notif = await _NotifService.GetNotification(id);
@@ -38,6 +42,7 @@ namespace SAV_Backend.Controllers
             return Ok(notif);
         }
         [HttpGet("clientNotifications/{clientId}")]
+        [Authorize(Roles = "Client,ResponsableSAV")]
         public async Task<IActionResult> GetNotificationByClientId(int clientId)
         {
             var notifs = await _NotifService.GetNotificationByClientId(clientId);
@@ -53,6 +58,7 @@ namespace SAV_Backend.Controllers
 
 
         [HttpPost("markOneNotificationAsRead/{id}")]
+        [Authorize(Roles = "Client,ResponsableSAV")]
         public async Task<IActionResult> MarkAsRead(int id)
         {
             var result = await _NotifService.MarkAsRead(id);
@@ -64,6 +70,7 @@ namespace SAV_Backend.Controllers
         }
 
         [HttpPost("markManyNotificationAsRead")]
+        [Authorize(Roles = "Client,ResponsableSAV")]
         public async Task<IActionResult> MarkAsRead([FromBody] List<int> notificationIds)
         {
             if (notificationIds == null || !notificationIds.Any())

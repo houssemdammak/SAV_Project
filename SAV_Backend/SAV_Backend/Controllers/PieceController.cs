@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SAV_Backend.Interfaces;
 
@@ -6,6 +7,7 @@ namespace SAV_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Client,ResponsableSAV")]
     public class PieceController : ControllerBase
     {
         private readonly IPieceService _Service;

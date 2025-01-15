@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SAV_Backend.Dto;
 using SAV_Backend.Interfaces;
@@ -9,6 +10,7 @@ namespace SAV_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Client,ResponsableSAV")]
     public class ReclamationController : ControllerBase
     {
         private readonly IReclamationService _reclamationService;

@@ -10,11 +10,15 @@ namespace SAV_Backend.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public ClientService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+
+        public ClientService(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
+
         }
 
         public async Task<IEnumerable<Client>> GetClients()
@@ -50,6 +54,7 @@ namespace SAV_Backend.Services
 
         public async Task<String> CreateClient(ClientCreateModel model)
         {
+            await EnsureRolesExist();
             var applicationUser = new ApplicationUser
             {
                 UserName = model.Email,
@@ -60,7 +65,9 @@ namespace SAV_Backend.Services
             var result = await _userManager.CreateAsync(applicationUser, model.Password);
             if (!result.Succeeded)
                 return string.Join(", ", result.Errors.Select(e => e.Description));
-                //return false;
+            var roleResult = await _userManager.AddToRoleAsync(applicationUser, "Client");
+            if (!roleResult.Succeeded)
+                return string.Join(", ", roleResult.Errors.Select(e => e.Description));
 
             var client = new Client
             {
@@ -155,5 +162,21 @@ namespace SAV_Backend.Services
 
             return true;
         }
+        private async Task EnsureRolesExist()
+        {
+            string[] roleNames = { "Client", "ResponsableSAV" };
+            foreach (var roleName in roleNames)
+            {
+                if (!await _roleManager.RoleExistsAsync(roleName))
+                {
+                    var roleResult = await _roleManager.CreateAsync(new IdentityRole(roleName));
+                    if (!roleResult.Succeeded)
+                    {
+                        throw new Exception("Error in roles");
+                    }
+                }
+            }
+        }
+
     }
 }

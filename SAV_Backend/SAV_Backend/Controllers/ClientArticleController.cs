@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SAV_Backend.Interfaces;
 using SAV_Backend.Models;
@@ -7,6 +8,7 @@ namespace SAV_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Client,ResponsableSAV")]
     public class ClientArticleController : ControllerBase
     {
         private readonly IClientArticleService _clientArticleService;

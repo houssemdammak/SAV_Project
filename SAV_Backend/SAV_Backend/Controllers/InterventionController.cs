@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SAV_Backend.Dto;
 using SAV_Backend.Interfaces;
@@ -8,6 +9,7 @@ namespace SAV_Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Client,ResponsableSAV")]
     public class InterventionController : ControllerBase
     {
         private readonly IInterventionService _interventionService;

@@ -49,7 +49,7 @@ namespace SAV_Backend.Controllers
             if (result.Succeeded)
             {
                 string userType;
-                int userID=0;
+                int userID = 0;
                 if (user.Client != null)
                 {
                     userType = "Client";
@@ -76,16 +76,20 @@ namespace SAV_Backend.Controllers
             return Unauthorized("Invalid password");
         }
 
-        private string GenerateJwtToken(IdentityUser user, string userType)
+        private string GenerateJwtToken(ApplicationUser user, string userType)
         {
+
+            var roles = _userManager.GetRolesAsync(user).Result;
+            var roleClaims = roles.Select(role => new Claim(ClaimTypes.Role, role)).ToList();
+
             var claims = new[]
             {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim(ClaimTypes.NameIdentifier, user.Id),
-        new Claim(ClaimTypes.Email, user.Email),
-        new Claim("UserType", userType) // Add user type as a custom claim
-    };
+            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim("UserType", userType)
+            }.Union(roleClaims);
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourEvenMoreSuperSecretKey123456!"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -102,7 +106,7 @@ namespace SAV_Backend.Controllers
         }
 
         [HttpGet("protected-endpoint")]
-        [Authorize]
+        [Authorize(Roles = "Client,ResponsableSAV")]
         public IActionResult ProtectedEndpoint()
         {
             return Ok("This is a protected endpoint.");
@@ -116,6 +120,8 @@ namespace SAV_Backend.Controllers
             return Ok(new { message = "Logged out successfully." });
         }
 
+
+        
     }
 
 

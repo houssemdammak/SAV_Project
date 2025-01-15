@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SAV_Backend.Dto;
 using SAV_Backend.Interfaces;
 using SAV_Backend.Models;
@@ -7,6 +8,7 @@ namespace SAV_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "ResponsableSAV")]
     public class ResponsableController : ControllerBase
     {
         private readonly IResponsableService _responsableService;
