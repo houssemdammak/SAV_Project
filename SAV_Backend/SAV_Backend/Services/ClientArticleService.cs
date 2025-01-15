@@ -32,7 +32,7 @@ namespace SAV_Backend.Services
             {
                 throw new ArgumentException("Article not found", nameof(clientArticle.ArticleId));
             }
-
+            clientArticle.DateFinGarantie = DateTime.Now.AddYears(1);
             // Only set the ClientId and ArticleId (no need to set Client and Article objects directly)
             _context.ClientArticles.Add(clientArticle);
             await _context.SaveChangesAsync();
